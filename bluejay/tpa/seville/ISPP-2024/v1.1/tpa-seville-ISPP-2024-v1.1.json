@@ -1,10 +1,10 @@
 {
     "id": "tpa-1010101010",
-    "version": "0.0.3",
+    "version": "1.1.0",
     "type": "agreement",
     "context": {
         "validity": {
-            "initial": "2022-01-01",
+            "initial": "2023-01-01",
             "timeZone": "America/Los_Angeles"
         },
         "definitions": {
@@ -52,7 +52,7 @@
                             "0": {
                                 "type": "divider-github-states",
                                 "config": {
-                                    "title": "PSG2-2223 Dashboard"
+                                    "title": "ISPP-2024 Dashboard"
                                 }
                             },
                             "1": {
@@ -407,7 +407,7 @@
                                     "2": {
                                         "type": "objectsFilterObjects",
                                         "filters": [
-                                            "content.assignees.nodes.0.login == '%MEMBER.github.username%'"
+                                            "content.assignees.nodes.*any*.login == '%MEMBER.github.username%'"
                                         ]
                                     },
                                     "3": {
@@ -568,7 +568,7 @@
                                     "2": {
                                         "type": "objectsFilterObjects",
                                         "filters": [
-                                            "content.assignees.nodes.0.login == '%MEMBER.github.username%'"
+                                            "content.assignees.nodes.*any*.login == '%MEMBER.github.username%'"
                                         ]
                                     },
                                     "3": {
@@ -1060,7 +1060,7 @@
                         "window": {
                             "type": "static",
                             "period": "hourly",
-                            "initial": "2022-01-01"
+                            "initial": "2023-01-01"
                         }
                     }
                 ]
@@ -1097,7 +1097,7 @@
                         "window": {
                             "type": "static",
                             "period": "weekly",
-                            "initial": "2022-01-01"
+                            "initial": "2023-01-01"
                         }
                     }
                 ]
