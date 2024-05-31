@@ -1,0 +1,2 @@
+- Now the metric for Issues in "In Progress" per member (COUNT_INPROGRESSISSUES_MEMBER) collect all assigned members and not just the first one
+- Now the metric for Issues in "Done" per member (COUNT_DONEISSUES_MEMBER) collect all assigned members and not just the first one
