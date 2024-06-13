@@ -74,3 +74,6 @@ HOURLY by TEAM
 - **Timegraph (member)**: Amount of issues in the “In Progress” column over time by member (ATP4).
   - **Acceptable threshold**: Lower or equal to 1.
   - **Unacceptable threshold**: Greater than 1.
+
+![image](https://github.com/governify/zoo/assets/100673872/d1119267-a37f-46c6-880f-fd550532ee63)
+
