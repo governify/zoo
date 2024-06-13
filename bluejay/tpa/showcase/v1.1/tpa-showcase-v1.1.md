@@ -75,5 +75,6 @@ HOURLY by TEAM
   - **Acceptable threshold**: Lower or equal to 1.
   - **Unacceptable threshold**: Greater than 1.
 
-![image](https://github.com/governify/zoo/assets/100673872/d1119267-a37f-46c6-880f-fd550532ee63)
+![pixelized](https://github.com/governify/zoo/assets/100673872/4876a7e1-265b-4134-a25c-6a07f3ae7fb4)
+
 
