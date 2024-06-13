@@ -1,0 +1,699 @@
+{
+    "id": "tpa-1010101010",
+    "version": "1.0.0",
+    "type": "agreement",
+    "context": {
+        "validity": {
+            "initial": "2023-02-01",
+            "timeZone": "America/Los_Angeles"
+        },
+        "definitions": {
+            "schemas": {},
+            "scopes": {
+                "development": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    }
+                }
+            },
+            "collectors": {
+                "eventcollector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                }
+            },
+            "dashboards": {
+                "main": {
+                    "overlay": "",
+                    "base": "",
+                    "modifier": "",
+                    "config": {
+                        "configDashboard": true,
+                        "blocks": {
+                            "1": {
+                                "type": "divider-changer-github",
+                                "config": {
+                                    "title": "Simplified dashboard",
+                                    "button-text": "Go to Full View",
+                                    "old-view": "main",
+                                    "new-view": "complete"
+                                }
+                            },
+                            "2": {
+                                "type": "gauge",
+                                "guarantee": "75_PERCENT_RELEASE_MERGEPR_WITHIN_TEN_MINUTES",
+                                "config": {}
+                            },
+                            "4": {
+                                "type": "gauge-notZero",
+                                "guarantee": "CORRELATION_NEWBRANCH_STARTEDSTORIES",
+                                "config": {
+                                    "not-zero-metric": "metric_NUMBER_PT_STARTEDSTORIES"
+                                }
+                            },
+                            "5": {
+                                "type": "gauge-notZero",
+                                "guarantee": "CORRELATION_OPENPR_FINISHEDSTORIES",
+                                "config": {
+                                    "not-zero-metric": "metric_NUMBER_PT_FINISHEDSTORIES"
+                                }
+                            },
+                            "6": {
+                                "type": "gauge-notZero",
+                                "guarantee": "CORRELATION_MERGEPR_DELIVEREDSTORIES",
+                                "config": {
+                                    "not-zero-metric": "metric_NUMBER_PT_DELIVEREDSTORIES"
+                                }
+                            },
+                            "7": {
+                                "type": "gauge",
+                                "guarantee": "PERCENT_GITHUB_ACTIONS_SUCCESSFULBUILDS",
+                                "config": {}
+                            },
+                            "8": {
+                                "type": "gauge",
+                                "guarantee": "PERCENTAGE_PT_ONE_POINT_STORIES_OVER_80",
+                                "config": {}
+                            },
+                            "9": {
+                                "type": "gauge-notZero",
+                                "guarantee": "PERCENTAGE_GITHUB_NEWPRS_AFTER_CREATED_ONE_POINT_STORIES_IN_LESS_THAN_THREE_DAYS",
+                                "config": {
+                                    "not-zero-metric": "metric_NUMBER_PT_ONE_POINT_STORIES"
+                                }
+                            }
+                        }
+                    }
+                },
+                "complete": {
+                    "overlay": "",
+                    "base": "",
+                    "modifier": "",
+                    "config": {
+                        "configDashboard": true,
+                        "blocks": {
+                            "1": {
+                                "type": "divider-changer-github",
+                                "config": {
+                                    "title": "Full dashboard",
+                                    "button-text": "Go to simplified View",
+                                    "old-view": "complete",
+                                    "new-view": "main"
+                                }
+                            },
+                            "2": {
+                                "type": "gauge-time",
+                                "guarantee": "75_PERCENT_RELEASE_MERGEPR_WITHIN_TEN_MINUTES"
+                            },
+                            "4": {
+                                "type": "gauge-time-correlation-notZero",
+                                "guarantee": "CORRELATION_NEWBRANCH_STARTEDSTORIES",
+                                "config": {
+                                    "scope-class": "CS169L-23",
+                                    "x-axis-metric": "metric_NUMBER_PT_STARTEDSTORIES",
+                                    "y-axis-metric": "metric_COUNT_NEWBRANCH_STARTEDSTORIES",
+                                    "not-zero-metric": "metric_NUMBER_PT_STARTEDSTORIES",
+                                    "time-graph-title": "Percentage of correlation between GH New Branches/PT Started Stories"
+                                }
+                            },
+                            "5": {
+                                "type": "gauge-time-correlation-notZero",
+                                "guarantee": "CORRELATION_OPENPR_FINISHEDSTORIES",
+                                "config": {
+                                    "scope-class": "CS169L-23",
+                                    "x-axis-metric": "metric_NUMBER_PT_FINISHEDSTORIES",
+                                    "y-axis-metric": "metric_COUNT_OPENPR_FINISHEDSTORIES",
+                                    "not-zero-metric": "metric_NUMBER_PT_FINISHEDSTORIES",
+                                    "time-graph-title": "Percentage of correlation between GH Opened PR/PT Finished Stories"
+                                }
+                            },
+                            "6": {
+                                "type": "gauge-time-correlation-notZero",
+                                "guarantee": "CORRELATION_MERGEPR_DELIVEREDSTORIES",
+                                "config": {
+                                    "scope-class": "CS169L-23",
+                                    "x-axis-metric": "metric_NUMBER_PT_DELIVEREDSTORIES",
+                                    "y-axis-metric": "metric_COUNT_MERGEPR_DELIVEREDSTORIES",
+                                    "not-zero-metric": "metric_NUMBER_PT_DELIVEREDSTORIES",
+                                    "time-graph-title": "Percentage of correlation between GH Merged PR/PT Delivered Stories"
+                                }
+                            },
+                            "7": {
+                                "type": "gauge-time",
+                                "guarantee": "PERCENT_GITHUB_ACTIONS_SUCCESSFULBUILDS",
+                                "config": {
+                                    "scope-class": "CS169L-23",
+                                    "time-graph-title": "Percentage of successful builds by GitHub Actions"
+                                }
+                            },
+                            "8": {
+                                "type": "gauge-time",
+                                "guarantee": "PERCENTAGE_PT_ONE_POINT_STORIES_OVER_80",
+                                "config": {
+                                    "scope-class": "CS169L-23",
+                                    "time-graph-title": "Percentage of 1 point stories in PT"
+                                }
+                            },
+                            "9": {
+                                "type": "gauge-time-correlation-notZero",
+                                "guarantee": "PERCENTAGE_GITHUB_NEWPRS_AFTER_CREATED_ONE_POINT_STORIES_IN_LESS_THAN_THREE_DAYS",
+                                "config": {
+                                    "scope-class": "CS169L-23",
+                                    "x-axis-metric": "metric_NUMBER_PT_ONE_POINT_STORIES",
+                                    "y-axis-metric": "metric_COUNT_NEWPR_CREATED_ONE_POINT_STORIES_THREE_DAYS",
+                                    "not-zero-metric": "metric_NUMBER_PT_ONE_POINT_STORIES",
+                                    "time-graph-title": "Percentage of correlation between GH Created PR/PT 1 Point Stories"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "infrastructure": {}
+    },
+    "terms": {
+        "metrics": {
+            "NUMBER_PT_STARTEDSTORIES": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "pivotal": {
+                            "activity": {
+                                "highlight": "started"
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "NUMBER_PT_FINISHEDSTORIES": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "pivotal": {
+                            "activity": {
+                                "highlight": "finished"
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "NUMBER_PT_DELIVEREDSTORIES": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "pivotal": {
+                            "activity": {
+                                "highlight": "delivered"
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "NUMBER_PT_STORIES": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "pivotal": {
+                            "stories": {}
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "NUMBER_PT_ONE_POINT_STORIES": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "pivotal": {
+                            "stories": {
+                                "estimate": 1
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "COUNT_NEWBRANCH_STARTEDSTORIES": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": {
+                        "count": {
+                            "related": {
+                                "github": {
+                                    "events": {
+                                        "type": "CreateEvent",
+                                        "payload": {
+                                            "ref_type": "branch",
+                                            "ref": "#CONTAINS(changes.0.id)#"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "event": {
+                        "pivotal": {
+                            "activity": {
+                                "highlight": "started"
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "COUNT_OPENPR_FINISHEDSTORIES": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": {
+                        "count": {
+                            "related": {
+                                "github": {
+                                    "allPR": {
+                                        "title": "#CONTAINS(changes.0.id)#"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "event": {
+                        "pivotal": {
+                            "activity": {
+                                "highlight": "finished"
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "COUNT_MERGEPR_DELIVEREDSTORIES": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": {
+                        "count": {
+                            "related": {
+                                "github": {
+                                    "mergedPR": {
+                                        "title": "#CONTAINS(changes.0.id)#"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "event": {
+                        "pivotal": {
+                            "activity": {
+                                "highlight": "delivered"
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "NUMBER_HEROKU_RELEASE": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "heroku": {
+                            "releases": {
+                                "status": "succeeded"
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "NUMBER_RELEASE_MERGEPR": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": {
+                        "count": {
+                            "related": {
+                                "heroku": {
+                                    "releases": {
+                                        "status": "succeeded",
+                                        "description": "%CONTAINS%Deploy"
+                                    }
+                                },
+                                "window": 600
+                            }
+                        }
+                    },
+                    "event": {
+                        "github": {
+                            "mergedPR": {}
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "NUMBER_GA_BUILDS": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubCI": {
+                            "builds": {
+                                "status": "completed",
+                                "head_branch": "main"
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "NUMBER_GA_SUCCESSFULBUILDS": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubCI": {
+                            "builds": {
+                                "status": "completed",
+                                "conclusion": "success",
+                                "head_branch": "main"
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "PERCENTAGE_PT_ONE_POINT_STORIES": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": {
+                        "percentage": {
+                            "related": {
+                                "pivotal": {
+                                    "stories": {
+                                        "estimate": 1
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "event": {
+                        "pivotal": {
+                            "stories": {}
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            },
+            "COUNT_NEWPR_CREATED_ONE_POINT_STORIES_THREE_DAYS": {
+                "collector": {
+                    "$ref": "#/context/definitions/collectors/eventcollector"
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": {
+                        "count": {
+                            "related": {
+                                "github": {
+                                    "allPR": {
+                                        "title": "#CONTAINS(id)#"
+                                    }
+                                },
+                                "window": 259200
+                            }
+                        }
+                    },
+                    "event": {
+                        "pivotal": {
+                            "stories": {
+                                "estimate": 1
+                            }
+                        }
+                    },
+                    "scope": {
+                        "$ref": "#/context/definitions/scopes/development"
+                    }
+                }
+            }
+        },
+        "guarantees": [
+            {
+                "id": "75_PERCENT_RELEASE_MERGEPR_WITHIN_TEN_MINUTES",
+                "notes": "#### Description\r\n```\r\nTP-1: At least 75% of releases(H) must match the merge of a PR(GH) into master within ten minutes.",
+                "description": "At least 75% of releases must match the merge of a PR into master within ten minutes.",
+                "scope": {
+                    "$ref": "#/context/definitions/scopes/development"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "Project": "1010101010"
+                        },
+                        "objective": "NUMBER_RELEASE_MERGEPR / NUMBER_HEROKU_RELEASE * 100 >= 75",
+                        "with": {
+                            "NUMBER_RELEASE_MERGEPR": {},
+                            "NUMBER_HEROKU_RELEASE": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "daily",
+                            "initial": "2020-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_NEWBRANCH_STARTEDSTORIES",
+                "notes": "#### Description\r\n```\r\nTP-2: At least 75% of started stories(PT) must match the creation of a branch(GH) within a day.",
+                "description": "At least 75% of started stories must match the creation of a branch within a day.",
+                "scope": {
+                    "$ref": "#/context/definitions/scopes/development"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "Project": "1010101010"
+                        },
+                        "objective": "COUNT_NEWBRANCH_STARTEDSTORIES / NUMBER_PT_STARTEDSTORIES * 100 >= 75",
+                        "with": {
+                            "COUNT_NEWBRANCH_STARTEDSTORIES": {},
+                            "NUMBER_PT_STARTEDSTORIES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "daily",
+                            "initial": "2020-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_OPENPR_FINISHEDSTORIES",
+                "notes": "#### Description\r\n```\r\nTP-3: At least 75% of finished stories(PT) must match the creation of a PR(GH) within a day.",
+                "description": "At least 75% of finished stories must match the creation of a PR within a day.",
+                "scope": {
+                    "$ref": "#/context/definitions/scopes/development"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "Project": "1010101010"
+                        },
+                        "objective": "COUNT_OPENPR_FINISHEDSTORIES / NUMBER_PT_FINISHEDSTORIES * 100 >= 75",
+                        "with": {
+                            "COUNT_OPENPR_FINISHEDSTORIES": {},
+                            "NUMBER_PT_FINISHEDSTORIES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "daily",
+                            "initial": "2020-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_MERGEPR_DELIVEREDSTORIES",
+                "notes": "#### Description\r\n```\r\nTP-4: At least 75% of delivered stories(PT) must match the merge of a PR(GH) within a day.",
+                "description": "At least 75% of delivered stories must match the merge of a PR within a day.",
+                "scope": {
+                    "$ref": "#/context/definitions/scopes/development"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "Project": "1010101010"
+                        },
+                        "objective": "COUNT_MERGEPR_DELIVEREDSTORIES / NUMBER_PT_DELIVEREDSTORIES * 100 >= 75",
+                        "with": {
+                            "COUNT_MERGEPR_DELIVEREDSTORIES": {},
+                            "NUMBER_PT_DELIVEREDSTORIES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "daily",
+                            "initial": "2020-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "PERCENT_GITHUB_ACTIONS_SUCCESSFULBUILDS",
+                "notes": "#### Description\r\n```\r\nTP-5: At least 75% of Github Actions builds in main branch should pass correctly.",
+                "description": "At least 75% of Github Actions builds in main branch should pass correctly.",
+                "scope": {
+                    "$ref": "#/context/definitions/scopes/development"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "Project": "1010101010"
+                        },
+                        "objective": "NUMBER_GA_BUILDS / NUMBER_GA_SUCCESSFULBUILDS * 100 >= 75",
+                        "with": {
+                            "NUMBER_GA_BUILDS": {},
+                            "NUMBER_GA_SUCCESSFULBUILDS": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "weekly",
+                            "initial": "2021-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "PERCENTAGE_PT_ONE_POINT_STORIES_OVER_80",
+                "notes": "#### Description\r\n```\r\nTP-6: At least 80% of PT stories should be estimated as 1 point stories.",
+                "description": "At least 80% of PT stories should be estimated as 1 point stories.",
+                "scope": {
+                    "$ref": "#/context/definitions/scopes/development"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "Project": "1010101010"
+                        },
+                        "objective": "NUMBER_PT_ONE_POINT_STORIES / NUMBER_PT_STORIES * 100 >= 80",
+                        "with": {
+                            "NUMBER_PT_ONE_POINT_STORIES": {},
+                            "NUMBER_PT_STORIES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "daily",
+                            "initial": "2023-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "PERCENTAGE_GITHUB_NEWPRS_AFTER_CREATED_ONE_POINT_STORIES_IN_LESS_THAN_THREE_DAYS",
+                "notes": "#### Description\r\n```\r\nTP-7: At least 75% of created stories(PT) must match the creation of a PR(GH) within 3 days.",
+                "description": "At least 75% of created stories must match the creation of a PR within 3 days.",
+                "scope": {
+                    "$ref": "#/context/definitions/scopes/development"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "Project": "1010101010"
+                        },
+                        "objective": "COUNT_NEWPR_CREATED_ONE_POINT_STORIES_THREE_DAYS / NUMBER_PT_ONE_POINT_STORIES * 100 >= 75",
+                        "with": {
+                            "COUNT_NEWPR_CREATED_ONE_POINT_STORIES_THREE_DAYS": {},
+                            "NUMBER_PT_ONE_POINT_STORIES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "daily",
+                            "initial": "2020-01-01"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
