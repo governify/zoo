@@ -32,36 +32,24 @@ Some definitions in relation to the Governify ecosystem (more precisely, for Blu
 6. **Blocks** have different display **styles** according to the guarantee. In this TPA we will use the following blocks:
 - **Timegraph by member**: Evolution of the value that a guarantee takes over time. This block requires 1 guarantee and can be used for displaying data by team or by each member.
 
-# **TP1: Percentage of new branches related to “In Progress” <a name="_page5_x72.00_y89.25"></a>issues (by Team, Hourly)**
+# **TP1: Number of “In Progress” issues (by Member, Hourly)**
 
-**When an issue is started, it should usually get its own branch.**
+**A developer should only be working on one issue at a time**
 
-This TP provides information about the team in relation to creating branches right after moving an issue to "In Progress". The correct application of this practice requires that the following actions are done simultaneously (checked every hour):
-
-1. An **issue** is moved from the "Todo" column to the "In Progress" column.
-1. A **branch** that contains the number of the **issue** moved to "In Progress" in the title, in the format **/number**, is **created**.
-
-
+This TP provides information about team’s members in relation to the number of “In Progress” issues. The correct application of this practice is as follows:
 
 |**Example**|
 | - |
-|<p>1. The issue called “Creation of pets for vets **#35**” is moved from “Todo” to “In Progress”.</p><p>2. Then, a new branch is created with the number of the issue included in its name as follows: “PetsCreation**/35**”, “feature**/35**-Pets-creation”, etc.</p>|
-
-### **Calculation Pre-Requirements** (if not met, a point won’t be created in the corresponding period):
-
-- A new branch was created during the last hour.
+|1. The member Alexander does not have any issues “In Progress” <br>2. He decides to move an issue that is assigned to him into the "In Progress" column. <br>3. He wants to take on a new issue, but prior to moving it into "In Progress", he must move the issue that is already "In Progress" into the “In Review” column. Then, he will be able to start a new task.|
 
 ### **Metrics:**
 
-- **ATP1**: number of branches created including in its name the number of an issue in the column of “In Progress” by the team in the last hour.
-- **BTP1**: number of branches created by the team in the last hour.
+- **ATP1**: number of issues in the “In Progress” column by member in the last hour.
 
 ### **Guarantee:**
 
-| ATP1/BTP1 × 100 ≥ 75 ![](Aspose.Words.4ec03acd-2318-481d-93b7-f01ad26fb58d.006.png)1 |
+| ATP1 ≤ 1 <br>HOURLY by MEMBER|
 | - |
-
-HOURLY by TEAM
 
 ### Possible False-Positive:
 
@@ -71,7 +59,7 @@ HOURLY by TEAM
 
 ### Dashboard block:
 
-- **Timegraph (member)**: Amount of issues in the “In Progress” column over time by member (ATP4).
+- **Timegraph (member)**: Amount of issues in the “In Progress” column over time by member (ATP1)
   - **Acceptable threshold**: Lower or equal to 1.
   - **Unacceptable threshold**: Greater than 1.
 
