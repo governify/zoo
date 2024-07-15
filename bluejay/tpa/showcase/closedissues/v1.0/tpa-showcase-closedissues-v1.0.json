@@ -1,0 +1,280 @@
+{
+    "id": "tpa-1010101010",
+    "version": "1.0.0",
+    "type": "agreement",
+    "context": {
+        "validity": {
+            "initial": "2022-01-01",
+            "timeZone": "America/Los_Angeles"
+        },
+        "definitions": {
+            "schemas": {},
+            "scopes": {
+                "development": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": {
+                        "name": "Member",
+                        "description": "Member",
+                        "type": "string",
+                        "default": "*"
+                    }
+                }
+            },
+            "collectors": {
+                "eventcollector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                }
+            },
+            "dashboards": {
+                "main": {
+                    "base": "$_[infrastructure.internal.assets.default]/api/v1/public/grafana-dashboards/tpa/base.json",
+                    "modifier": "$_[infrastructure.internal.assets.default]/api/v1/public/grafana-dashboards/tpa/modifier.js",
+                    "overlay": "$_[infrastructure.internal.assets.default]/api/v1/public/grafana-dashboards/tpa/overlay.js",
+                    "config": {
+                        "configDashboard": true,
+                        "blocks": {
+                            "0": {
+                                "type": "divider-github-states",
+                                "config": {
+                                    "title": "CS105 2023 Dashboard"
+                                }
+                            },
+                            "1": {
+                                "type": "time-graph2-member",
+                                "guarantee": "NUMBER_CLOSEDISSUES_AT_LEAST_1",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "time-graph-title": "Number of closed issues by member"
+                                }
+                            },
+                            "2": {
+                                "type": "time-graph2-member-notZero",
+                                "guarantee": "CORRELATION_COMMENTECLOSEDISSUES_CLOSEDISSUES",
+                                "config": {
+                                    "scope-class": "showcase",
+                                    "not-zero-metric": "metric_COUNT_CLOSEDISSUES_MEMBER",
+                                    "time-graph-title": "Correlation between commented closed issues and closed issues by member"
+                                }
+                            }
+                        }
+                    },
+                    "notifications": {}
+                },
+                "infrastructure": {}
+            }
+        }
+    },
+    "terms": {
+        "metrics": {
+            "COUNT_CLOSEDISSUES_MEMBER": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get closed issues",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "query": "{\r\n        repository(name: \"%PROJECT.github.repository%\", owner: \"%PROJECT.github.repoOwner%\") {\r\n          issues(first: 100, states:CLOSED) {\r\n            pageInfo {\r\n              hasNextPage\r\n              endCursor\r\n            }\r\n            totalCount\r\n            nodes {\r\n              closedAt\r\n              title\r\n              assignees(first: 100) {\r\n                nodes {\r\n                  name\r\n                  login\r\n                  email\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }",
+                                        "cache": true
+                                    },
+                                    "1": {
+                                        "type": "objectGetSubObjects",
+                                        "location": "data.repository.issues.nodes"
+                                    },
+                                    "2": {
+                                        "type": "objectsFilterObjects",
+                                        "filters": [
+                                            "assignees.nodes.*any*.login == '%MEMBER.github.username%'"
+                                        ]
+                                    },
+                                    "3": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getReviews(inputData, variables) {\r\n    let res = [];\r\n     for (let issue of inputData) {\r\n        if (new Date(issue.closedAt) > new Date(variables.from) && new Date(issue.closedAt) < new Date(variables.to)) {\r\n            res.push(issue);\r\n                  }\r\n    }\r\n    return res;\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_COMMENTED_CLOSEDISSUES_MEMBER": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get commented closed issues",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "query": "{\r\n        repository(name: \"bluejay-showcase\", owner:\"governify\") {\r\n          issues(first: 100, states:CLOSED) {\r\n            pageInfo {\r\n              hasNextPage\r\n              endCursor\r\n            }\r\n            totalCount\r\n            nodes {\r\n              closedAt\r\n              title\r\n              comments(first:100){\r\n                totalCount\r\n              }\r\n              assignees(first:100){\r\n                pageInfo {\r\n                  hasNextPage\r\n                  endCursor\r\n                }\r\n                totalCount\r\n                nodes {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }",
+                                        "cache": true
+                                    },
+                                    "1": {
+                                        "type": "objectGetSubObjects",
+                                        "location": "data.repository.issues.nodes"
+                                    },
+                                    "2": {
+                                        "type": "objectsFilterObjects",
+                                        "filters": [
+                                            "assignees.nodes.*any*.login == '%MEMBER.github.username%'"
+                                        ]
+                                    },
+                                    "3": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getReviews(inputData, variables) {\r\n    let res = [];\r\n      for (let issue of inputData) {\r\n        if (new Date(issue.closedAt) > new Date(variables.from) && new Date(issue.closedAt) < new Date(variables.to) && issue.comments.totalCount>0) {\r\n            res.push(issue);\r\n               }\r\n    }\r\n    return res;\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            }
+        },
+        "guarantees": [
+            {
+                "id": "NUMBER_CLOSEDISSUES_AT_LEAST_1",
+                "notes": "#### Description\r\n```\r\nTP-1: At most 1 closed issue every weeks.",
+                "description": "A developer should close 1 issue every weeks.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": "*"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010",
+                            "member": "*"
+                        },
+                        "objective": "COUNT_CLOSEDISSUES_MEMBER <= 1",
+                        "with": {
+                            "COUNT_CLOSEDISSUES_MEMBER": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "weekly",
+                            "initial": "2022-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_COMMENTECLOSEDISSUES_CLOSEDISSUES",
+                "notes": "#### Description\r\n```\r\nTP-2: At least 75% of the issues closed by a member should have at least one comment from any member.",
+                "description": "A developer should close an issue only if it has at least comment.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": "*"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010",
+                            "member": "*"
+                        },
+                        "objective": "COUNT_COMMENTED_CLOSEDISSUES_MEMBER/COUNT_CLOSEDISSUES_MEMBER * 100 >= 75",
+                        "with": {
+                            "COUNT_CLOSEDISSUES_MEMBER": {},
+                            "COUNT_COMMENTED_CLOSEDISSUES_MEMBER": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "weekly",
+                            "initial": "2022-01-01"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,4 +1,4 @@
-**https://github.com/governify/zoo/tree/main/bluejay/tpa/showcase/v1.1**
+**https://github.com/governify/zoo/tree/main/bluejay/tpa/showcase/basic/v1.1**
 
 **Support:** <https://app.gitter.im/#/room/#governify_community:gitter.im>
 
