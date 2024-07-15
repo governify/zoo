@@ -60,6 +60,9 @@ This TP provides information about members in relation to close issues. The corr
   - **Acceptable threshold**: Greater or equal than 1.
   - **Unacceptable threshold**: lower than 1.
 
+![image](https://github.com/user-attachments/assets/e404fdf2-8b0f-42d6-9264-3ab3bb8f1b33)
+
+
 # **TP2: At least 75% of the issues closed by a member should have at least one comment from any member.(by Member, Weekly)**
 
 **A developer should close an issue only if it has at least comment.**
@@ -89,3 +92,5 @@ This TP provides information about members in relation to close issues with at l
 - **Timegraph (member)**: Correlation between commented closed issues and closed issues by member (ATP2 and BTP2).
   - **Acceptable threshold**: Greater or equal than 75%.
   - **Unacceptable threshold**: lower than 75%.
+
+![image](https://github.com/user-attachments/assets/547ce836-f593-4bdf-99f2-45be18a99556)
