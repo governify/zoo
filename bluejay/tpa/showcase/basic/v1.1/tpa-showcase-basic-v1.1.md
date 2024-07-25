@@ -44,11 +44,11 @@ This TP provides information about team’s members in relation to the number of
 
 ### **Metrics:**
 
-- **ATP1**: number of issues in the “In Progress” column by member in the last hour.
+- **COUNT_INPROGRESSISSUES_MEMBER**: number of issues in the “In Progress” column by member in the last hour.
 
 ### **Guarantee:**
 
-| ATP1 ≤ 1 <br>HOURLY by MEMBER|
+| COUNT_INPROGRESSISSUES_MEMBER ≤ 1 <br>HOURLY by MEMBER|
 | - |
 
 ### Possible False-Positive:
@@ -59,7 +59,7 @@ This TP provides information about team’s members in relation to the number of
 
 ### Dashboard block:
 
-- **Timegraph (member)**: Amount of issues in the “In Progress” column over time by member (ATP1)
+- **Timegraph (member)**: Amount of issues in the “In Progress” column over time by member (COUNT_INPROGRESSISSUES_MEMBER)
   - **Acceptable threshold**: Lower or equal to 1.
   - **Unacceptable threshold**: Greater than 1.
 
