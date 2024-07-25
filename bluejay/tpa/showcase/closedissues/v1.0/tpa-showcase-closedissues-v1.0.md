@@ -47,16 +47,16 @@ This TP provides information about members in relation to close issues. The corr
 
 ### **Metrics:**
 
-- **ATP1**: number of closed issues assigned to a member in the week.
+- **COUNT_CLOSEDISSUES_MEMBER**: number of closed issues assigned to a member in the week.
 
 ### **Guarantee:**
 
-| ATP1 ≥ 1 <br> WEEKLY by MEMBER |
+| COUNT_CLOSEDISSUES_MEMBER ≥ 1 <br> WEEKLY by MEMBER |
 | - |
 
 ### Dashboard block:
 
-- **Timegraph (member)**: Number of closed issues over time by member (ATP1).
+- **Timegraph (member)**: Number of closed issues over time by member (COUNT_CLOSEDISSUES_MEMBER).
   - **Acceptable threshold**: Greater or equal than 1.
   - **Unacceptable threshold**: lower than 1.
 
@@ -79,17 +79,17 @@ This TP provides information about members in relation to close issues with at l
 
 ### **Metrics:**
 
-- **ATP2**: number of closed issues assigned to a member in the week.
-- **BTP2**: number of commented closed issues assigned to a member in the week.
+- **COUNT_CLOSEDISSUES_MEMBER**: number of closed issues assigned to a member in the week.
+- **COUNT_COMMENTED_CLOSEDISSUES_MEMBER**: number of commented closed issues assigned to a member in the week.
 
 ### **Guarantee:**
 
-| ATP2/BTP2 ≥ 75 <br> WEEKLY by MEMBER |
+| COUNT_COMMENTED_CLOSEDISSUES_MEMBER/COUNT_CLOSEDISSUES_MEMBER ≥ 75 <br> WEEKLY by MEMBER |
 | - |
 
 ### Dashboard block:
 
-- **Timegraph (member)**: Correlation between commented closed issues and closed issues by member (ATP2 and BTP2).
+- **Timegraph (member)**: Correlation between commented closed issues and closed issues by member (COUNT_CLOSEDISSUES_MEMBER and COUNT_COMMENTED_CLOSEDISSUES_MEMBER).
   - **Acceptable threshold**: Greater or equal than 75%.
   - **Unacceptable threshold**: lower than 75%.
 
