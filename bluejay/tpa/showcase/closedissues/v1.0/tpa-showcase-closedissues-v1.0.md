@@ -84,7 +84,7 @@ This TP provides information about members in relation to close issues with at l
 
 ### **Guarantee:**
 
-| COUNT_COMMENTED_CLOSEDISSUES_MEMBER/COUNT_CLOSEDISSUES_MEMBER ≥ 75 <br> WEEKLY by MEMBER |
+| COUNT_COMMENTED_CLOSEDISSUES_MEMBER/COUNT_CLOSEDISSUES_MEMBER x 100 ≥ 75 <br> WEEKLY by MEMBER |
 | - |
 
 ### Dashboard block:
