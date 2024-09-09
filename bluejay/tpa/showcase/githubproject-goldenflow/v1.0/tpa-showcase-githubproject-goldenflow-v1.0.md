@@ -59,18 +59,19 @@ This TP provides information about team in relation to creation of new branches 
 | - |
 
 ### Dashboard block:
+![image](https://github.com/user-attachments/assets/69d96cbd-8b98-44f0-a666-ab7021a73fef)
 
 - **Gauge 1**: Mean percentage of CORRELATION_INPROGRESSISSUES_NEWBRANCH since the beginning of the project.
-  - **Low range:**: [0%, 50%)
+  - **Low range**: [0%, 50%)
   - **Mid range**: [50%,75%)
   - **High range**: [75%, 100%]
 
 - **Gauge 2**: Mean percentage of the CORRELATION_INPROGRESSISSUES_NEWBRANCH on the selected period in Grafana.
-  - **Low range:**: [0%, 50%)
+  - **Low range**: [0%, 50%)
   - **Mid range**: [50%,75%)
   - **High range**: [75%, 100%]
 
-- **Timegraph (team):**: Evolution of CORRELATION_INPROGRESSISSUES_NEWBRANCH over time.
+- **Timegraph (team)**: Evolution of CORRELATION_INPROGRESSISSUES_NEWBRANCH over time.
   - **Acceptable threshold**: Greater or equal than 75%
   - **Unacceptable threshold**: lower than 75%.
 
@@ -105,18 +106,19 @@ This TP provides information about team in relation to creation of new branches 
 | - |
 
 ### Dashboard block:
+![image](https://github.com/user-attachments/assets/31b2573a-942d-4656-81cf-2a60b6e74f79)
 
 - **Gauge 1**: Mean percentage of CORRELATION_BRANCHESASSOCIATED_INPROGRESSISSUES since the beginning of the project.
-  - **Low range:**: [0%, 50%)
+  - **Low range**: [0%, 50%)
   - **Mid range**: [50%,75%)
   - **High range**: [75%, 100%]
 
 - **Gauge 2**: Mean percentage of the CORRELATION_BRANCHESASSOCIATED_INPROGRESSISSUES on the selected period in Grafana.
-  - **Low range:**: [0%, 50%)
+  - **Low range**: [0%, 50%)
   - **Mid range**: [50%,75%)
   - **High range**: [75%, 100%]
 
-- **Timegraph (team):**: Evolution of CORRELATION_BRANCHESASSOCIATED_INPROGRESSISSUES over time.
+- **Timegraph (team)**: Evolution of CORRELATION_BRANCHESASSOCIATED_INPROGRESSISSUES over time.
   - **Acceptable threshold**: Greater or equal than 75%
   - **Unacceptable threshold**: lower than 75%.
 
@@ -151,18 +153,19 @@ This TP provides information about team in relation to creation of new pull requ
 | - |
 
 ### Dashboard block:
+![image](https://github.com/user-attachments/assets/7418ae4a-aa8e-4bc1-bd22-90961e61e56a)
 
 - **Gauge 1**: Mean percentage of CORRELATION_INREVIEWISSUES_OPENPR since the beginning of the project.
-  - **Low range:**: [0%, 50%)
+  - **Low range**: [0%, 50%)
   - **Mid range**: [50%,75%)
   - **High range**: [75%, 100%]
 
 - **Gauge 2**: Mean percentage of the CORRELATION_INREVIEWISSUES_OPENPR on the selected period in Grafana.
-  - **Low range:**: [0%, 50%)
+  - **Low range**: [0%, 50%)
   - **Mid range**: [50%,75%)
   - **High range**: [75%, 100%]
 
-- **Timegraph (team):**: Evolution of CORRELATION_INREVIEWISSUES_OPENPR over time.
+- **Timegraph (team)**: Evolution of CORRELATION_INREVIEWISSUES_OPENPR over time.
   - **Acceptable threshold**: Greater or equal than 75%
   - **Unacceptable threshold**: lower than 75%.
 
@@ -170,7 +173,7 @@ This TP provides information about team in relation to creation of new pull requ
   - X axis: COUNT_INREVIEW_ISSUES
   - Y axis: COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR
 
-# **At least 75% of 'Done' issues must match merge of a Pull Request.(by Team, Hourly)**
+# **TP4: At least 75% of 'Done' issues must match merge of a Pull Request.(by Team, Hourly)**
 
 **When an issue is moved to Done, the Pull Request associated to the issue must be merge.**
 
@@ -196,18 +199,19 @@ This TP provides information about the team regarding the merging of pull reques
 | - |
 
 ### Dashboard block:
+![image](https://github.com/user-attachments/assets/712eb97e-b535-47a6-a462-ee992bb469d6)
 
 - **Gauge 1**: Mean percentage of CORRELATION_DONEISSUES_MERGEDPR since the beginning of the project.
-  - **Low range:**: [0%, 50%)
+  - **Low range**: [0%, 50%)
   - **Mid range**: [50%,75%)
   - **High range**: [75%, 100%]
 
 - **Gauge 2**: Mean percentage of the CORRELATION_DONEISSUES_MERGEDPR on the selected period in Grafana.
-  - **Low range:**: [0%, 50%)
+  - **Low range**: [0%, 50%)
   - **Mid range**: [50%,75%)
   - **High range**: [75%, 100%]
 
-- **Timegraph (team):**: Evolution of CORRELATION_DONEISSUES_MERGEDPR over time.
+- **Timegraph (team)**: Evolution of CORRELATION_DONEISSUES_MERGEDPR over time.
   - **Acceptable threshold**: Greater or equal than 75%
   - **Unacceptable threshold**: lower than 75%.
 
