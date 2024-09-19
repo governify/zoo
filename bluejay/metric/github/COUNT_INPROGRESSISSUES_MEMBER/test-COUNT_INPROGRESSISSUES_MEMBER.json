@@ -1,0 +1,52 @@
+{
+    "config": {
+        "scopeManager": "http://host.docker.internal:5700/api/v1/scopes/development"
+    },
+    "metric": {
+        "computing": "actual",
+        "element": "number",
+        "event": {
+            "githubGQL": {
+                "custom": {
+                    "type": "graphQL",
+                    "title": "Get issues in progress",
+                    "steps": {
+                        "0": {
+                            "type": "queryGetObject",
+                            "query": "{repository(name: \"%PROJECT.github.repository%\", owner: \"%PROJECT.github.repoOwner%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                author {\r\n                  login\r\n                }\r\n                assignees(first: 5  ) {\r\n                    nodes {\r\n                        login\r\n                    }\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 100) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldUserValue {\r\n                    field {\r\n                        ... on ProjectV2Field {\r\n                            name\r\n                        }\r\n                    }\r\n                }\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldMilestoneValue {\r\n                    field {\r\n                        ... on ProjectV2Field {\r\n                            name\r\n                        }\r\n                    }\r\n                    milestone {\r\n                        number\r\n                        title \r\n                    }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                            "cache": true
+                        },
+                        "1": {
+                            "type": "objectGetSubObjects",
+                            "location": "data.repository.projectsV2.nodes.0.items.nodes"
+                        },
+                        "2": {
+                            "type": "objectsFilterObjects",
+                            "filters": [
+                                "content.assignees.nodes.*any*.login == '%MEMBER.github.username%'"
+                            ]
+                        },
+                        "3": {
+                            "type": "runScript",
+                            "variables": {},
+                            "script": "module.exports.generic = function getFieldValues(inputData, variables) {\r\n    let result = [];\r\n    for (const issue of inputData) {\r\n        for (const fieldValue of issue.fieldValues.nodes) {\r\n            if (fieldValue.name === 'In Progress') {\r\n                               result.push(issue);\r\n                \r\n            }\r\n        }\r\n    }\r\n    return result;\r\n}"
+                        }
+                    }
+                },
+                "window": 3600
+            },
+            "scope": {
+                "project": "showcase-GH-governify_bluejay-showcase",
+                "class": "showcase"
+            },
+            "window": {
+                "type": "static",
+                "period": "hourly",
+                "initial": "2023-04-08T00:00:00.000Z",
+                "from": "2023-04-08T00:00:00.000Z",
+                "end": "2023-04-08T00:59:59.999Z",
+                "timeZone": "America/Los_Angeles"
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "1": {
+        "type": "time-graph2-member",
+        "guarantee": "NUMBER_INPROGRESSISSUES_HOURLY_UNDER_1",
+        "config": {
+            "scope-class": "2020202020",
+            "time-graph-title": "Number of issues in the 'In Progress' column"
+        }
+    }
+}

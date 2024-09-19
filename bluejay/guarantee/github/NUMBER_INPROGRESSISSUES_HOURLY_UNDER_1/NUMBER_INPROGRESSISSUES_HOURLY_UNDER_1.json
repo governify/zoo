@@ -1,0 +1,37 @@
+{
+    "id": "NUMBER_INPROGRESSISSUES_HOURLY_UNDER_1",
+    "notes": "#### Description\r\n```\r\nTP-1: At most 1 in progress issue every hour.",
+    "description": "A developer should only be working on one issue at a time",
+    "scope": {
+        "project": {
+            "name": "Project",
+            "description": "Project",
+            "type": "string",
+            "default": "1010101010"
+        },
+        "class": {
+            "name": "Class",
+            "description": "Group some Projects",
+            "type": "string",
+            "default": "2020202020"
+        },
+        "member": "*"
+    },
+    "of": [
+        {
+            "scope": {
+                "project": "1010101010",
+                "member": "*"
+            },
+            "objective": "COUNT_INPROGRESSISSUES_MEMBER <= 1",
+            "with": {
+                "COUNT_INPROGRESSISSUES_MEMBER": {}
+            },
+            "window": {
+                "type": "static",
+                "period": "hourly",
+                "initial": "2022-01-01"
+            }
+        }
+    ]
+}
