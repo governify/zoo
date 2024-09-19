@@ -37,7 +37,8 @@
             },
             "scope": {
                 "project": "showcase-GH-governify_bluejay-showcase",
-                "class": "showcase"
+                "class": "showcase",
+                "member": "*"
             },
             "window": {
                 "type": "static",
