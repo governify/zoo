@@ -17,7 +17,7 @@ This TP provides information about team’s members in relation to the number of
 
 ### **Metrics:**
 
-- **COUNT_INPROGRESSISSUES_MEMBER**: number of issues in the “In Progress” column by member in the last hour.
+- **[COUNT_INPROGRESSISSUES_MEMBER](https://github.com/governify/zoo/tree/main/bluejay/metric/github/COUNT_INPROGRESSISSUES_MEMBER)**: number of issues in the “In Progress” column by member in the last hour.
 
 ### **Guarantee:**
 
