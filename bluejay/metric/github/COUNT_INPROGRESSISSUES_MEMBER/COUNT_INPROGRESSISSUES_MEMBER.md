@@ -12,7 +12,7 @@
 This metric provides information about the number of issues in progress that each team member has in their repository project.
 
 
-### API Data**
+### **API Data**
 This metric makes use of the github GraphQL API. The following request is made to obtain all the issues associated with the projects of a repository:
 
 ```
@@ -98,7 +98,7 @@ This metric makes use of the github GraphQL API. The following request is made t
 
 You can reproduce this request in the [web explorer](https://docs.github.com/es/graphql/overview/explorer) provided by github.
 
-### Post-processing**
+### **Post-processing**
 Once the information is obtained, it is processed by choosing the first project in the repository, all issues are filtered by selecting only those in which the user is assigned, and finally, only the issues that are in the In Progress column are chosen.
 
 ```json
