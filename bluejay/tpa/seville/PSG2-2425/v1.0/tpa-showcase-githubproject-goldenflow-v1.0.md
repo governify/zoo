@@ -291,6 +291,8 @@ finish an issue before the weekends in order to comply with the established team
   - **Acceptable threshold**: Greater or equal than 1
   - **Unacceptable threshold**: Lower than 1.
 
+![image](https://github.com/user-attachments/assets/fe66f73e-9c75-4c77-927a-6a72948d325f)
+
 ---
 
 # **TP7: Percentage of approved mergedPR (by Team, Hourly)**
@@ -318,6 +320,8 @@ This TP provides information about the team in relation to the reviews on each m
 | - |
 
 ### Dashboard block:
+
+![image](https://github.com/user-attachments/assets/d41c2fdf-e38e-4312-9189-1aeb5be59aac)
 
 - **Gauge 1**: Mean percentage of CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_TEAM since the beginning of the project.
   - **Low range**: [0%, 50%)
@@ -368,6 +372,8 @@ This TP provides information about members in relation to the reviews on each me
 - **Timegraph (member)**: Evolution of CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_MEMBER over time.
   - **Acceptable threshold**: Greater or equal than 75%
   - **Unacceptable threshold**: Lower than 75%.
+ 
+![image](https://github.com/user-attachments/assets/409115a3-6e1c-4fe7-912e-1d565288fc2d)
 
 ---
 
@@ -400,6 +406,8 @@ This TP provides information about members in relation to the reviews on each me
   - **Acceptable threshold**: Greater or equal than 1
   - **Unacceptable threshold**: Lower than 1.
 
+![image](https://github.com/user-attachments/assets/0a620f16-1d84-4f3f-8f75-7c072810e155)
+
 ---
 
 # **TP10: Percentage of teammate PRs approved or commented (By Member, Weekly)**
@@ -431,6 +439,8 @@ This TP provides information about the team members in relation to the open pull
   - **Acceptable threshold**: Greater or equal than 20%
   - **Unacceptable threshold**: Lower than 20%.
 
+![image](https://github.com/user-attachments/assets/09e0bb10-8f5d-4979-bd93-871a9f497c51)
+
 ---
 
 # **TP11: Number of teammate PRs approved or commented (By Member, Weekly)**
@@ -461,3 +471,4 @@ This TP provides information about the team members in relation to the open pull
   - **Acceptable threshold**: Greater or equal than 1
   - **Unacceptable threshold**: Lower than 1.
 
+![image](https://github.com/user-attachments/assets/6dc03b03-cf16-4515-a23e-60cac64d8b18)
