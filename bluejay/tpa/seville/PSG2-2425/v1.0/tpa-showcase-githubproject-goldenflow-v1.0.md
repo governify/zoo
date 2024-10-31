@@ -32,6 +32,8 @@ Some definitions in relation to the Governify ecosystem (more precisely, for Blu
 6. **Blocks** have different display **styles** according to the guarantee. In this TPA we will use the following blocks:
 - **Timegraph by member**: Evolution of the value that a guarantee takes over time. This block requires 1 guarantee and can be used for displaying data by team or by each member.
 
+---
+
 # **TP1: At least 75% of 'In Progress' issues must match creation of a branch.(by Team, Hourly)**
 
 **When an issue is moved to In Progress, a branch associated to this issue must be created.**
@@ -78,6 +80,8 @@ This TP provides information about team in relation to creation of new branches 
 - **Correlation**: Correlation between the metrics COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES and COUNT_INPROGRESS_ISSUES on the period selected in Grafana
   - X axis: COUNT_INPROGRESS_ISSUES
   - Y axis: COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES
+
+---
 
 # **TP2: At least 75% of 'In Progress' issues must have different branches associated.(by Team, Hourly)**
 
@@ -126,6 +130,8 @@ This TP provides information about team in relation to creation of new branches 
   - X axis: COUNT_INPROGRESS_ISSUES
   - Y axis: COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES
 
+---
+
 # **TP3: At least 75% of 'In Review' issues must match creation of a Pull Request.(by Team, Hourly)**
 
 **When an issue is moved to In Review, a Pull Request associated to that issue must be created.**
@@ -173,6 +179,8 @@ This TP provides information about team in relation to creation of new pull requ
   - X axis: COUNT_INREVIEW_ISSUES
   - Y axis: COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR
 
+---
+
 # **TP4: At least 75% of 'Done' issues must match merge of a Pull Request.(by Team, Hourly)**
 
 **When an issue is moved to Done, the Pull Request associated to the issue must be merge.**
@@ -219,6 +227,8 @@ This TP provides information about the team regarding the merging of pull reques
   - X axis: COUNT_DONE_ISSUES
   - Y axis: COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR
 
+---
+
 # **TP5: Number of “In Progress” issues (by Member, Hourly)**
 
 **A developer should only be working on one issue at a time**
@@ -252,6 +262,8 @@ This TP provides information about team’s members in relation to the number of
 
 ![pixelized](https://github.com/governify/zoo/assets/100673872/4876a7e1-265b-4134-a25c-6a07f3ae7fb4)
 
+---
+
 # **TP6: Number of “Done” issues (by Member, Weekly)**
 
 **Each developer should be finishing at least 1 issue per week**
@@ -276,6 +288,176 @@ finish an issue before the weekends in order to comply with the established team
 ### Dashboard block:
 
 - **Timegraph (member)**: Amount of issues in the “Done” column over time by member (COUNT_DONEISSUES_MEMBER).
+  - **Acceptable threshold**: Greater or equal than 1
+  - **Unacceptable threshold**: Lower than 1.
+
+---
+
+# **TP7: Percentage of approved mergedPR (by Team, Hourly)**
+
+**Most merged PRs should be approved**
+
+This TP provides information about the team in relation to the reviews on each merged pull request. The correct application of this practice is as follows:
+
+1. A pull request is created by a member.
+2. A different member reviews the pull request with an approval.
+3. The pull request is merged.
+
+|**Example**|
+| - |
+| John creates a new pull request. Then, Elon reviews the pull request with approval, so that the pull request can now be merged.|
+
+### **Metrics:**
+
+- **COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_TEAM**: number of merged pull requests with at least one positive review by the team in the last week.
+- **COUNT_PR_MERGED_TEAM**: number of merged pull requests by the team in the last week.
+
+### **Guarantee:**
+
+| COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_TEAM / COUNT_PR_MERGED_TEAM x 100 ≥ 75 <br> WEEKLY by TEAM |
+| - |
+
+### Dashboard block:
+
+- **Gauge 1**: Mean percentage of CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_TEAM since the beginning of the project.
+  - **Low range**: [0%, 50%)
+  - **Mid range**: [50%,75%)
+  - **High range**: [75%, 100%]
+
+- **Gauge 2**: Mean percentage of the CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_TEAM on the selected period in Grafana.
+  - **Low range**: [0%, 50%)
+  - **Mid range**: [50%,75%)
+  - **High range**: [75%, 100%]
+
+- **Timegraph (team)**: Evolution of CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_TEAM over time.
+  - **Acceptable threshold**: Greater or equal than 75%
+  - **Unacceptable threshold**: Lower than 75%.
+
+- **Correlation**: Correlation between the metrics COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_TEAM and COUNT_PR_MERGED_TEAM on the period selected in Grafana
+  - X axis: COUNT_PR_MERGED_TEAM
+  - Y axis: COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_TEAM
+
+---
+
+# **TP8: Percentage of approved mergedPR (By Member, Hourly)**
+
+**Most of your merged PRs should be approved by your teammates**
+
+This TP provides information about members in relation to the reviews on each merged pull request. The correct application of this practice is as follows:
+
+1. A pull request is created by a member.
+2. A different member reviews the pull request with an approval.
+3. The pull request is merged.
+
+|**Example**|
+| - |
+| John creates a new pull request. Then, Elon reviews the pull request with approval, so that the pull request can now be merged.|
+
+### **Metrics (for a given member M):**
+
+- **COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER**: number of merged pull requests by member M with at least one positive review during the last week.
+- **COUNT_PR_MERGED_MEMBER**: number of merged pull requests by the same member M during the last week.
+
+### **Guarantee:**
+
+| COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER / COUNT_PR_MERGED_MEMBER x 100 ≥ 75 <br> WEEKLY by MEMBER |
+| - |
+
+### Dashboard block:
+
+- **Timegraph (member)**: Evolution of CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_MEMBER over time.
+  - **Acceptable threshold**: Greater or equal than 75%
+  - **Unacceptable threshold**: Lower than 75%.
+
+---
+
+# **TP9: Number of approved mergedPR (By Member, Weekly)**
+
+**If you merge a PR, it should be approved by at least 1 teammate**
+
+This TP provides information about members in relation to the reviews on each merged pull request. The correct application of this practice is as follows:
+
+1. A pull request is created by a member.
+2. A different member reviews the pull request with approval.
+3. The pull request is merged.
+
+|**Example**|
+| - |
+| John creates a new pull request. Then, Elon reviews the pull request with approval, so that the pull request can now be merged.|
+
+### **Metrics:**
+
+- **COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER**: number of merged pull requests by a member with at least one positive review during the last week.
+
+### **Guarantee:**
+
+| COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER ≥ 1 <br> WEEKLY by MEMBER |
+| - |
+
+### Dashboard block:
+
+- **Timegraph (member)**: Number of merged pull requests by a member with at least one positive review over time (COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER).
+  - **Acceptable threshold**: Greater or equal than 1
+  - **Unacceptable threshold**: Lower than 1.
+
+---
+
+# **TP10: Percentage of teammate PRs approved or commented (By Member, Weekly)**
+
+**You should comment or approve your teammates' PRs**
+
+This TP provides information about the team members in relation to the open pull requests with at least one comment. The correct application of this practice is as follows:
+
+1. A pull request is created by a member.
+2. A different member comments on the pull request at least one time every week the PR remains open.
+
+|**Example**|
+| - |
+| Andrew creates a new pull request during week 3. Then, Logan comments on the pull request in the same week, but the pull request is not closed until week 4, so Logan will need to comment again in week 4 too.|
+
+### **Metrics for a member M:**
+
+- **COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER**: number of open pull requests (not created by member M) with at least one comment by member M during the last week.
+- **COUNT_PR**: number of open pull requests not created by member M during the last week.
+
+### **Guarantee:**
+
+| COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER / COUNT_PR x 100 ≥ 20 <br> WEEKLY by MEMBER |
+| - |
+
+### Dashboard block:
+
+- **Timegraph (member)**: Evolution of CORRELATION_COUNTPRSWITHATLEASTONECOMMENTORONEREVIEWCOMMENTBYMEMBER_AND_COUNTPR over time.
+  - **Acceptable threshold**: Greater or equal than 20%
+  - **Unacceptable threshold**: Lower than 20%.
+
+---
+
+# **TP11: Number of teammate PRs approved or commented (By Member, Weekly)**
+
+**You should comment or approve at least one of your teammates' PRs in a week**
+
+This TP provides information about the team members in relation to the open pull requests with at least one comment. The correct application of this practice is as follows:
+
+1. A pull request is created by a member.
+2. A different member comments on the pull request at least one time every week the PR remains open.
+
+|**Example**|
+| - |
+| Andrew creates a new pull request during week 3. Then, Logan comments on the pull request in the same week, but the pull request is not closed until week 4, so Logan will need to comment again in week 4.|
+
+### **Metrics:**
+
+- **COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER**: number of pull requests not created by the member with at least one comment by the member during the last week.
+
+### **Guarantee:**
+
+| COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER ≥ 1 <br> WEEKLY by MEMBER |
+| - |
+
+### Dashboard block:
+
+- **Timegraph (member)**: Number of pull requests not created by the member in which the member has made a comment over time (COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER).
   - **Acceptable threshold**: Greater or equal than 1
   - **Unacceptable threshold**: Lower than 1.
 
