@@ -1,6 +1,6 @@
 {
     "id": "tpa-1010101010",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "type": "agreement",
     "context": {
         "validity": {
@@ -52,7 +52,7 @@
                             "0": {
                                 "type": "divider-github-states",
                                 "config": {
-                                    "title": "PSG-2024 Dashboard"
+                                    "title": "ISPP-2324 Dashboard"
                                 }
                             },
                             "1": {
@@ -407,7 +407,7 @@
                                     "2": {
                                         "type": "objectsFilterObjects",
                                         "filters": [
-                                            "content.assignees.nodes.0.login == '%MEMBER.github.username%'"
+                                            "content.assignees.nodes.*any*.login == '%MEMBER.github.username%'"
                                         ]
                                     },
                                     "3": {
@@ -568,7 +568,7 @@
                                     "2": {
                                         "type": "objectsFilterObjects",
                                         "filters": [
-                                            "content.assignees.nodes.0.login == '%MEMBER.github.username%'"
+                                            "content.assignees.nodes.*any*.login == '%MEMBER.github.username%'"
                                         ]
                                     },
                                     "3": {

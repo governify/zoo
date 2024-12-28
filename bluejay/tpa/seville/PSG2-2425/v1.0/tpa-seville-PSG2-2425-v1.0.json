@@ -1,10 +1,10 @@
 {
     "id": "tpa-1010101010",
-    "version": "1.1.0",
+    "version": "1.0.0",
     "type": "agreement",
     "context": {
         "validity": {
-            "initial": "2023-01-01",
+            "initial": "2024-01-01",
             "timeZone": "America/Los_Angeles"
         },
         "definitions": {
@@ -52,7 +52,7 @@
                             "0": {
                                 "type": "divider-github-states",
                                 "config": {
-                                    "title": "PSG-2024 Dashboard"
+                                    "title": "Dashboard PSG2-2425"
                                 }
                             },
                             "1": {
@@ -60,35 +60,46 @@
                                 "guarantee": "CORRELATION_INPROGRESSISSUES_NEWBRANCH",
                                 "config": {
                                     "scope-class": "2020202020",
-                                    "x-axis-metric": "metric_NUMBER_GH_NEWBRANCH",
-                                    "y-axis-metric": "metric_COUNT_INPROGRESSISSUES_NEWBRANCH",
-                                    "not-zero-metric": "metric_NUMBER_GH_NEWBRANCH",
-                                    "time-graph-title": "Correlation between GH New Branches and Issues in the 'In Progress' column"
+                                    "x-axis-metric": "metric_COUNT_INPROGRESS_ISSUES",
+                                    "y-axis-metric": "metric_COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES",
+                                    "not-zero-metric": "metric_COUNT_INPROGRESS_ISSUES",
+                                    "time-graph-title": "Correlation between issues in the 'In Progress' column with associated branches and issues in the 'In Progress' column"
                                 }
                             },
                             "2": {
                                 "type": "gauge-period-time-correlation-notZero",
-                                "guarantee": "CORRELATION_INREVIEWISSUES_OPENPR",
+                                "guarantee": "CORRELATION_BRANCHESASSOCIATED_INPROGRESSISSUES",
                                 "config": {
                                     "scope-class": "2020202020",
-                                    "x-axis-metric": "metric_NUMBER_GH_OPENPR",
-                                    "y-axis-metric": "metric_COUNT_INREVIEWISSUES_OPENPR",
-                                    "not-zero-metric": "metric_NUMBER_GH_OPENPR",
-                                    "time-graph-title": "Correlation between GH Open PR and Issues in the 'In Review' column"
+                                    "x-axis-metric": "metric_COUNT_INPROGRESS_ISSUES",
+                                    "y-axis-metric": "metric_COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES",
+                                    "not-zero-metric": "metric_COUNT_INPROGRESS_ISSUES",
+                                    "time-graph-title": "Correlation between number of different branches associated to issues in the 'In Progress' column and issues in the 'In Progress' column"
                                 }
                             },
                             "3": {
                                 "type": "gauge-period-time-correlation-notZero",
-                                "guarantee": "CORRELATION_DONEISSUES_MERGEDPR",
+                                "guarantee": "CORRELATION_INREVIEWISSUES_OPENPR",
                                 "config": {
                                     "scope-class": "2020202020",
-                                    "x-axis-metric": "metric_NUMBER_GH_MERGEDPR",
-                                    "y-axis-metric": "metric_COUNT_DONEISSUES_MERGEDPR",
-                                    "not-zero-metric": "metric_NUMBER_GH_MERGEDPR",
-                                    "time-graph-title": "Correlation between GH Merged PR and Issues in the 'Done' column"
+                                    "x-axis-metric": "metric_COUNT_INREVIEW_ISSUES",
+                                    "y-axis-metric": "metric_COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR",
+                                    "not-zero-metric": "metric_COUNT_INREVIEW_ISSUES",
+                                    "time-graph-title": "Correlation between issues in the 'In Review' column with associated open pull requests and issues in the 'In Review' column"
                                 }
                             },
                             "4": {
+                                "type": "gauge-period-time-correlation-notZero",
+                                "guarantee": "CORRELATION_DONEISSUES_MERGEDPR",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "x-axis-metric": "metric_COUNT_DONE_ISSUES",
+                                    "y-axis-metric": "metric_COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR",
+                                    "not-zero-metric": "metric_COUNT_DONE_ISSUES",
+                                    "time-graph-title": "Correlation between issues in the 'Done' column with associated merged pull requests and issues in the 'Done' column"
+                                }
+                            },
+                            "5": {
                                 "type": "time-graph2-member",
                                 "guarantee": "NUMBER_INPROGRESSISSUES_HOURLY_UNDER_1",
                                 "config": {
@@ -96,7 +107,7 @@
                                     "time-graph-title": "Number of issues in the 'In Progress' column"
                                 }
                             },
-                            "5": {
+                            "6": {
                                 "type": "time-graph2-member-groupby",
                                 "guarantee": "NUMBER_DONEISSUES_WEEKLY_OVER_1",
                                 "config": {
@@ -106,7 +117,7 @@
                                     "aggregation": "sum"
                                 }
                             },
-                            "6": {
+                            "7": {
                                 "type": "gauge-period-time-correlation-notZero",
                                 "guarantee": "CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_TEAM",
                                 "config": {
@@ -117,7 +128,7 @@
                                     "time-graph-title": "Correlation between GH merged PR with at least one positive review and GH merged PR by team"
                                 }
                             },
-                            "7": {
+                            "8": {
                                 "type": "time-graph2-member-notZero",
                                 "guarantee": "CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_MEMBER",
                                 "config": {
@@ -126,7 +137,7 @@
                                     "time-graph-title": "Correlation between GH merged PR by a member with at least one positive review and GH merged PR by the same member"
                                 }
                             },
-                            "8": {
+                            "9": {
                                 "type": "time-graph2-member",
                                 "guarantee": "NUMBER_APPROVEDMERGEDPULLREQUEST_MEMBER",
                                 "config": {
@@ -134,7 +145,7 @@
                                     "time-graph-title": "Number of GH merged PR by a member with at least one positive review "
                                 }
                             },
-                            "9": {
+                            "10": {
                                 "type": "time-graph2-member-notZero",
                                 "guarantee": "CORRELATION_COUNTPRSWITHATLEASTONECOMMENTORONEREVIEWCOMMENTBYMEMBER_AND_COUNTPR",
                                 "config": {
@@ -143,7 +154,7 @@
                                     "time-graph-title": "Percentage of open pull requests with comments (including positive reviews) from non-creators in relation to open pull requests from different members"
                                 }
                             },
-                            "10": {
+                            "11": {
                                 "type": "time-graph2-member",
                                 "guarantee": "NUMBER_COUNTPRSWITHATLEASTONECOMMENTORONEREVIEWCOMMENTBYMEMBER",
                                 "config": {
@@ -161,7 +172,7 @@
     },
     "terms": {
         "metrics": {
-            "COUNT_INPROGRESSISSUES_NEWBRANCH": {
+            "COUNT_INPROGRESS_ISSUES": {
                 "collector": {
                     "infrastructurePath": "internal.collector.events",
                     "endpoint": "/api/v2/computations",
@@ -172,49 +183,28 @@
                 },
                 "measure": {
                     "computing": "actual",
-                    "element": {
-                        "count": {
-                            "related": {
-                                "githubGQL": {
-                                    "custom": {
-                                        "type": "graphQL",
-                                        "title": "Get issues in progress",
-                                        "steps": {
-                                            "0": {
-                                                "type": "queryGetObject",
-                                                "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
-                                                "cache": true
-                                            },
-                                            "1": {
-                                                "type": "runScript",
-                                                "variables": {},
-                                                "script": "module.exports.generic = function getDoneIssues(inputData, variables) {\r\n    return inputData.data.repository.projectsV2.nodes.map(project => project.items.nodes).flat()\r\n}"
-                                            },
-                                            "2": {
-                                                "type": "objectsFilterObjects",
-                                                "filters": [
-                                                    "fieldValues.nodes.*any*.name == 'In Progress'"
-                                                ]
-                                            },
-                                            "3": {
-                                                "type": "runScript",
-                                                "variables": {},
-                                                "script": "module.exports.generic = function getInProgressIssuesContent(inputData,variables)  {\r\n    return inputData.filter(issue => issue.content.number != null).map(issue => {issue.content.payloadDate = issue.fieldValues.nodes.find(fieldValue => fieldValue?.field?.name === 'Status').updatedAt; issue.content.number = '/' + issue.content.number; return issue.content})\r\n}"
-                                            }
-                                        }
-                                    }
-                                },
-                                "window": 3600
-                            }
-                        }
-                    },
+                    "element": "number",
                     "event": {
-                        "github": {
-                            "events": {
-                                "type": "CreateEvent",
-                                "payload": {
-                                    "ref_type": "branch",
-                                    "ref": "#CONTAINS(number)#"
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get in progress issues",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                title\r\n                bodyText\r\n                updatedAt\r\n                assignees(first:10){\r\n                  nodes{\r\n                    login\r\n                  }\r\n                }\r\n                createdAt\r\n                number\r\n                linkedBranches(first:10){\r\n                  totalCount\r\n                  nodes{\r\n                    ref{\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                        "cache": true
+                                    },
+                                    "1": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getInProgressIssues(inputData, variables) {\r\n    inputData.data.repository.projectsV2.nodes.forEach(project => {\r\n        project.items.nodes = project.items.nodes.filter(item => \r\n            item.fieldValues.nodes.some(fieldValue => \r\n                (fieldValue?.field?.name === \"Status\" && fieldValue?.name === \"In Progress\")\r\n            )\r\n        );\r\n    });\r\n    return inputData;\r\n}"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            result.push(projectItem);\r\n        }\r\n    }\r\n    return result\r\n}"
+                                    }
                                 }
                             }
                         }
@@ -235,7 +225,7 @@
                     }
                 }
             },
-            "NUMBER_GH_NEWBRANCH": {
+            "COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES": {
                 "collector": {
                     "infrastructurePath": "internal.collector.events",
                     "endpoint": "/api/v2/computations",
@@ -248,11 +238,26 @@
                     "computing": "actual",
                     "element": "number",
                     "event": {
-                        "github": {
-                            "events": {
-                                "type": "CreateEvent",
-                                "payload": {
-                                    "ref_type": "branch"
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get in progress issues with associated branches",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                title\r\n                bodyText\r\n                updatedAt\r\n                assignees(first:10){\r\n                  nodes{\r\n                    login\r\n                  }\r\n                }\r\n                createdAt\r\n                number\r\n                linkedBranches(first:10){\r\n                  totalCount\r\n                  nodes{\r\n                    ref{\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                        "cache": true
+                                    },
+                                    "1": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getInProgressIssues(inputData, variables) {\r\n    inputData.data.repository.projectsV2.nodes.forEach(project => {\r\n        project.items.nodes = project.items.nodes.filter(item => \r\n            item.fieldValues.nodes.some(fieldValue => \r\n                (fieldValue?.field?.name === \"Status\" && fieldValue?.name === \"In Progress\")\r\n            )\r\n        );\r\n    });\r\n    return inputData;\r\n}"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            if (projectItem.content.linkedBranches.totalCount > 0) {\r\n                result.push(projectItem);\r\n            }\r\n        }\r\n    }\r\n    return result\r\n}"
+                                    }
                                 }
                             }
                         }
@@ -273,77 +278,7 @@
                     }
                 }
             },
-            "COUNT_INREVIEWISSUES_OPENPR": {
-                "collector": {
-                    "infrastructurePath": "internal.collector.events",
-                    "endpoint": "/api/v2/computations",
-                    "type": "POST-GET-V1",
-                    "config": {
-                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
-                    }
-                },
-                "measure": {
-                    "computing": "actual",
-                    "element": {
-                        "count": {
-                            "related": {
-                                "githubGQL": {
-                                    "custom": {
-                                        "type": "graphQL",
-                                        "title": "Get issues in review",
-                                        "steps": {
-                                            "0": {
-                                                "type": "queryGetObject",
-                                                "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
-                                                "cache": true
-                                            },
-                                            "1": {
-                                                "type": "runScript",
-                                                "variables": {},
-                                                "script": "module.exports.generic = function getDoneIssues(inputData, variables) {\r\n    return inputData.data.repository.projectsV2.nodes.map(project => project.items.nodes).flat()\r\n}"
-                                            },
-                                            "2": {
-                                                "type": "objectsFilterObjects",
-                                                "filters": [
-                                                    "fieldValues.nodes.*any*.name == 'In Review'"
-                                                ]
-                                            },
-                                            "3": {
-                                                "type": "runScript",
-                                                "variables": {},
-                                                "script": "module.exports.generic = function getInReviewIssuesContent(inputData,variables)  {\r\n    return inputData.filter(issue => issue.content.number != null).map(issue => {issue.content.payloadDate = issue.fieldValues.nodes.find(fieldValue => fieldValue?.field?.name === 'Status').updatedAt; issue.content.number = '/' + issue.content.number; return issue.content})\r\n}"
-                                            }
-                                        }
-                                    }
-                                },
-                                "window": 3600
-                            }
-                        }
-                    },
-                    "event": {
-                        "github": {
-                            "openPR": {
-                                "title": "#CONTAINS(number)#"
-                            }
-                        }
-                    },
-                    "scope": {
-                        "project": {
-                            "name": "Project",
-                            "description": "Project",
-                            "type": "string",
-                            "default": "1010101010"
-                        },
-                        "class": {
-                            "name": "Class",
-                            "description": "Group some Projects",
-                            "type": "string",
-                            "default": "2020202020"
-                        }
-                    }
-                }
-            },
-            "NUMBER_GH_OPENPR": {
+            "COUNT_INREVIEW_ISSUES": {
                 "collector": {
                     "infrastructurePath": "internal.collector.events",
                     "endpoint": "/api/v2/computations",
@@ -356,8 +291,28 @@
                     "computing": "actual",
                     "element": "number",
                     "event": {
-                        "github": {
-                            "openPR": {}
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get in review issues",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                title\r\n                createdAt\r\n                assignees(first:10){\r\n                  nodes{\r\n                    login\r\n                  }\r\n                }\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                closedByPullRequestsReferences(first:10){\r\n                \ttotalCount\r\n                  nodes{\r\n                    state\r\n                    author{\r\n                      login\r\n                    }\r\n                    title\r\n                  }\r\n                }\t\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                        "cache": true
+                                    },
+                                    "1": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getInProgressIssues(inputData, variables) {\r\n    inputData.data.repository.projectsV2.nodes.forEach(project => {\r\n        project.items.nodes = project.items.nodes.filter(item => \r\n            item.fieldValues.nodes.some(fieldValue => \r\n                (fieldValue?.field?.name === \"Status\" && fieldValue?.name === \"In Review\")\r\n            )\r\n        );\r\n    });\r\n    return inputData;\r\n}"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            result.push(projectItem);\r\n        }\r\n    }\r\n    return result\r\n}"
+                                    }
+                                }
+                            }
                         }
                     },
                     "scope": {
@@ -376,7 +331,60 @@
                     }
                 }
             },
-            "COUNT_DONEISSUES_MEMBER": {
+            "COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get in review issues wiht associated open pull requests",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                title\r\n                createdAt\r\n                assignees(first:10){\r\n                  nodes{\r\n                    login\r\n                  }\r\n                }\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                closedByPullRequestsReferences(first:10){\r\n                \ttotalCount\r\n                  nodes{\r\n                    state\r\n                    author{\r\n                      login\r\n                    }\r\n                    title\r\n                  }\r\n                }\t\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                        "cache": true
+                                    },
+                                    "1": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getInProgressIssues(inputData, variables) {\r\n    inputData.data.repository.projectsV2.nodes.forEach(project => {\r\n        project.items.nodes = project.items.nodes.filter(item => \r\n            item.fieldValues.nodes.some(fieldValue => \r\n                (fieldValue?.field?.name === \"Status\" && fieldValue?.name === \"In Review\")\r\n            )\r\n        );\r\n    });\r\n    return inputData;\r\n}"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            if (projectItem.content.closedByPullRequestsReferences.totalCount > 0) {\r\n                for(let pullRequest of projectItem.content.closedByPullRequestsReferences.nodes){\r\n                    if(pullRequest.state === \"OPEN\"){\r\n                        result.push(projectItem);\r\n                        break;\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n    return result\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_DONE_ISSUES": {
                 "collector": {
                     "infrastructurePath": "internal.collector.events",
                     "endpoint": "/api/v2/computations",
@@ -396,24 +404,18 @@
                                 "steps": {
                                     "0": {
                                         "type": "queryGetObject",
-                                        "query": "{repository(name: \"%PROJECT.github.repository%\", owner: \"%PROJECT.github.repoOwner%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                author {\r\n                  login\r\n                }\r\n                assignees(first: 5  ) {\r\n                    nodes {\r\n                        login\r\n                    }\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 100) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldUserValue {\r\n                    field {\r\n                        ... on ProjectV2Field {\r\n                            name\r\n                        }\r\n                    }\r\n                }\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldMilestoneValue {\r\n                    field {\r\n                        ... on ProjectV2Field {\r\n                            name\r\n                        }\r\n                    }\r\n                    milestone {\r\n                        number\r\n                        title \r\n                    }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                        "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                title\r\n                createdAt\r\n                assignees(first:10){\r\n                  nodes{\r\n                    login\r\n                  }\r\n                }\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                closedByPullRequestsReferences(first:10){\r\n                \ttotalCount\r\n                  nodes{\r\n                    state\r\n                    author{\r\n                      login\r\n                    }\r\n                    title\r\n                  }\r\n                }\t\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
                                         "cache": true
                                     },
                                     "1": {
                                         "type": "runScript",
                                         "variables": {},
-                                        "script": "module.exports.generic = function getDoneIssues(inputData, variables) {\r\n    return inputData.data.repository.projectsV2.nodes.map(project => project.items.nodes).flat()\r\n}"
+                                        "script": "module.exports.generic = function getInProgressIssues(inputData, variables) {\r\n    inputData.data.repository.projectsV2.nodes.forEach(project => {\r\n        project.items.nodes = project.items.nodes.filter(item => \r\n            item.fieldValues.nodes.some(fieldValue => \r\n                (fieldValue?.field?.name === \"Status\" && fieldValue?.name === \"Done\")\r\n            )\r\n        );\r\n    });\r\n    return inputData;\r\n}"
                                     },
                                     "2": {
-                                        "type": "objectsFilterObjects",
-                                        "filters": [
-                                            "content.assignees.nodes.*any*.login == '%MEMBER.github.username%'"
-                                        ]
-                                    },
-                                    "3": {
                                         "type": "runScript",
                                         "variables": {},
-                                        "script": "module.exports.generic = function getFieldValues(inputData, variables) {\r\n    let result = [];\r\n    for (const issue of inputData) {\r\n        for (const fieldValue of issue.fieldValues.nodes) {\r\n            if (fieldValue.name === 'Done') {\r\n                if (new Date(fieldValue.updatedAt) > new Date(variables.from) && new Date(fieldValue.updatedAt) < new Date(variables.to)) {\r\n                    result.push(issue);\r\n                }\r\n            }\r\n        }\r\n    }\r\n    return result;\r\n}"
+                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            result.push(projectItem);\r\n        }\r\n    }\r\n    return result\r\n}"
                                     }
                                 }
                             }
@@ -435,7 +437,7 @@
                     }
                 }
             },
-            "COUNT_DONEISSUES_MERGEDPR": {
+            "COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR": {
                 "collector": {
                     "infrastructurePath": "internal.collector.events",
                     "endpoint": "/api/v2/computations",
@@ -446,46 +448,29 @@
                 },
                 "measure": {
                     "computing": "actual",
-                    "element": {
-                        "count": {
-                            "related": {
-                                "githubGQL": {
-                                    "custom": {
-                                        "type": "graphQL",
-                                        "title": "Get done issues",
-                                        "steps": {
-                                            "0": {
-                                                "type": "queryGetObject",
-                                                "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
-                                                "cache": true
-                                            },
-                                            "1": {
-                                                "type": "runScript",
-                                                "variables": {},
-                                                "script": "module.exports.generic = function getDoneIssues(inputData, variables) {\r\n    return inputData.data.repository.projectsV2.nodes.map(project => project.items.nodes).flat()\r\n}"
-                                            },
-                                            "2": {
-                                                "type": "objectsFilterObjects",
-                                                "filters": [
-                                                    "fieldValues.nodes.*any*.name == 'Done'"
-                                                ]
-                                            },
-                                            "3": {
-                                                "type": "runScript",
-                                                "variables": {},
-                                                "script": "module.exports.generic = function getDoneIssuesContent(inputData,variables)  {\r\n    return inputData.filter(issue => issue.content.number != null).map(issue => {issue.content.payloadDate = issue.fieldValues.nodes.find(fieldValue => fieldValue?.field?.name === 'Status').updatedAt; issue.content.number = '/' + issue.content.number; return issue.content})\r\n}"
-                                            }
-                                        }
-                                    }
-                                },
-                                "window": 3600
-                            }
-                        }
-                    },
+                    "element": "number",
                     "event": {
-                        "github": {
-                            "mergedPR": {
-                                "title": "#CONTAINS(number)#"
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get done issues with associated closed pull requests",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                title\r\n                createdAt\r\n                assignees(first:10){\r\n                  nodes{\r\n                    login\r\n                  }\r\n                }\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                closedByPullRequestsReferences(first:10){\r\n                \ttotalCount\r\n                  nodes{\r\n                    state\r\n                    author{\r\n                      login\r\n                    }\r\n                    title\r\n                  }\r\n                }\t\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                        "cache": true
+                                    },
+                                    "1": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getInProgressIssues(inputData, variables) {\r\n    inputData.data.repository.projectsV2.nodes.forEach(project => {\r\n        project.items.nodes = project.items.nodes.filter(item => \r\n            item.fieldValues.nodes.some(fieldValue => \r\n                (fieldValue?.field?.name === \"Status\" && fieldValue?.name === \"Done\")\r\n            )\r\n        );\r\n    });\r\n    return inputData;\r\n}"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            if (projectItem.content.closedByPullRequestsReferences.totalCount > 0) {\r\n                for(let pullRequest of projectItem.content.closedByPullRequestsReferences.nodes){\r\n                    if(pullRequest.state === \"MERGED\"){\r\n                        result.push(projectItem);\r\n                        break;\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n    return result\r\n}"
+                                    }
+                                }
                             }
                         }
                     },
@@ -505,7 +490,7 @@
                     }
                 }
             },
-            "NUMBER_GH_MERGEDPR": {
+            "COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES": {
                 "collector": {
                     "infrastructurePath": "internal.collector.events",
                     "endpoint": "/api/v2/computations",
@@ -518,8 +503,28 @@
                     "computing": "actual",
                     "element": "number",
                     "event": {
-                        "github": {
-                            "mergedPR": {}
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get branches associated to in progress issues",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "query": "{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                title\r\n                bodyText\r\n                updatedAt\r\n                assignees(first:10){\r\n                  nodes{\r\n                    login\r\n                  }\r\n                }\r\n                createdAt\r\n                number\r\n                linkedBranches(first:10){\r\n                  totalCount\r\n                  nodes{\r\n                    ref{\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                author {\r\n                  login\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 10) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                        "cache": true
+                                    },
+                                    "1": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getInProgressIssues(inputData, variables) {\r\n    inputData.data.repository.projectsV2.nodes.forEach(project => {\r\n        project.items.nodes = project.items.nodes.filter(item => \r\n            item.fieldValues.nodes.some(fieldValue => \r\n                (fieldValue?.field?.name === \"Status\" && fieldValue?.name === \"In Progress\")\r\n            )\r\n        );\r\n    });\r\n    return inputData;\r\n}"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            for(let branch of projectItem.content.linkedBranches.nodes){\r\n                if (!result.some(item => item.ref.name === branch.ref.name)) {\r\n                    result.push(branch);\r\n                }\r\n            }\r\n        }\r\n    }\r\n    return result\r\n}"
+                                    }
+                                }
+                            }
                         }
                     },
                     "scope": {
@@ -575,6 +580,65 @@
                                         "type": "runScript",
                                         "variables": {},
                                         "script": "module.exports.generic = function getFieldValues(inputData, variables) {\r\n    let result = [];\r\n    for (const issue of inputData) {\r\n        for (const fieldValue of issue.fieldValues.nodes) {\r\n            if (fieldValue.name === 'In Progress') {\r\n                               result.push(issue);\r\n                \r\n            }\r\n        }\r\n    }\r\n    return result;\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    }
+                }
+            },
+            "COUNT_DONEISSUES_MEMBER": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get done issues",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "query": "{repository(name: \"%PROJECT.github.repository%\", owner: \"%PROJECT.github.repoOwner%\") {\r\n    projectsV2(first: 5) {\r\n      nodes {\r\n        items(first: 100) {\r\n          nodes {\r\n            content {\r\n              ... on Issue {\r\n                bodyText\r\n                updatedAt\r\n                number\r\n                author {\r\n                  login\r\n                }\r\n                assignees(first: 5  ) {\r\n                    nodes {\r\n                        login\r\n                    }\r\n                }\r\n              }\r\n            }\r\n            fieldValues(first: 100) {\r\n              nodes {\r\n                ... on ProjectV2ItemFieldUserValue {\r\n                    field {\r\n                        ... on ProjectV2Field {\r\n                            name\r\n                        }\r\n                    }\r\n                }\r\n                ... on ProjectV2ItemFieldRepositoryValue {\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                  repository {\r\n                    nameWithOwner\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldTextValue {\r\n                  text\r\n                  field {\r\n                    ... on ProjectV2Field {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n                ... on ProjectV2ItemFieldMilestoneValue {\r\n                    field {\r\n                        ... on ProjectV2Field {\r\n                            name\r\n                        }\r\n                    }\r\n                    milestone {\r\n                        number\r\n                        title \r\n                    }\r\n                }\r\n                ... on ProjectV2ItemFieldSingleSelectValue {\r\n                  name\r\n                  updatedAt\r\n                  creator {\r\n                    login\r\n                  }\r\n                  field {\r\n                    ... on ProjectV2SingleSelectField {\r\n                      name\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                        "cache": true
+                                    },
+                                    "1": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getDoneIssues(inputData, variables) {\r\n    return inputData.data.repository.projectsV2.nodes.map(project => project.items.nodes).flat()\r\n}"
+                                    },
+                                    "2": {
+                                        "type": "objectsFilterObjects",
+                                        "filters": [
+                                            "content.assignees.nodes.*any*.login == '%MEMBER.github.username%'"
+                                        ]
+                                    },
+                                    "3": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getFieldValues(inputData, variables) {\r\n    let result = [];\r\n    for (const issue of inputData) {\r\n        for (const fieldValue of issue.fieldValues.nodes) {\r\n            if (fieldValue.name === 'Done') {\r\n                if (new Date(fieldValue.updatedAt) > new Date(variables.from) && new Date(fieldValue.updatedAt) < new Date(variables.to)) {\r\n                    result.push(issue);\r\n                }\r\n            }\r\n        }\r\n    }\r\n    return result;\r\n}"
                                     }
                                 }
                             }
@@ -923,7 +987,7 @@
             {
                 "id": "CORRELATION_INPROGRESSISSUES_NEWBRANCH",
                 "notes": "#### Description\r\n```\r\nTP-1: At least 75% of 'In Progress' issues must match creation of a branch.",
-                "description": "When an issue is started, it should usually get its own branch",
+                "description": "When an issue is moved to In Progress, a branch associated to this issue must be created.",
                 "scope": {
                     "project": {
                         "name": "Project",
@@ -943,23 +1007,59 @@
                         "scope": {
                             "project": "1010101010"
                         },
-                        "objective": "(COUNT_INPROGRESSISSUES_NEWBRANCH/NUMBER_GH_NEWBRANCH*100) >= 75",
+                        "objective": "(COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES/COUNT_INPROGRESS_ISSUES*100) >= 75",
                         "with": {
-                            "COUNT_INPROGRESSISSUES_NEWBRANCH": {},
-                            "NUMBER_GH_NEWBRANCH": {}
+                            "COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES": {},
+                            "COUNT_INPROGRESS_ISSUES": {}
                         },
                         "window": {
                             "type": "static",
                             "period": "hourly",
-                            "initial": "2023-01-01"
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_BRANCHESASSOCIATED_INPROGRESSISSUES",
+                "notes": "#### Description\r\n```\r\nTP-2: At least 75% of 'In Progress' issues must have different branches associated.",
+                "description": "When an issue is moved to In Progress, a branch associated to this issue must be created.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    }
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010"
+                        },
+                        "objective": "(COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES/COUNT_INPROGRESS_ISSUES*100) >= 75",
+                        "with": {
+                            "COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES": {},
+                            "COUNT_INPROGRESS_ISSUES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "hourly",
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
             },
             {
                 "id": "CORRELATION_INREVIEWISSUES_OPENPR",
-                "notes": "#### Description\r\n```\r\nTP-1: At least 75% of issues 'In Review' must match the creation of a PR.",
-                "description": "When an issue/story is ready for review, a PR should be opened to facilitate that review",
+                "notes": "#### Description\r\n```\r\nTP-3: At least 75% of 'In Review' issues must match creation of a Pull Request.",
+                "description": "When an issue is moved to In Review, a Pull Request associated to that issue must be created.",
                 "scope": {
                     "project": {
                         "name": "Project",
@@ -979,23 +1079,23 @@
                         "scope": {
                             "project": "1010101010"
                         },
-                        "objective": "(COUNT_INREVIEWISSUES_OPENPR/NUMBER_GH_OPENPR*100) >= 75",
+                        "objective": "(COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR/COUNT_INREVIEW_ISSUES*100) >= 75",
                         "with": {
-                            "COUNT_INREVIEWISSUES_OPENPR": {},
-                            "NUMBER_GH_OPENPR": {}
+                            "COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR": {},
+                            "COUNT_INREVIEW_ISSUES": {}
                         },
                         "window": {
                             "type": "static",
                             "period": "hourly",
-                            "initial": "2023-01-01"
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
             },
             {
                 "id": "CORRELATION_DONEISSUES_MERGEDPR",
-                "notes": "#### Description\r\n```\r\nTP-1: At least 75% of done issues must match the merge of a PR.",
-                "description": "An issue being marked 'done' should be quickly followed by merging its associated PR",
+                "notes": "#### Description\r\n```\r\nTP-4: At least 75% of 'Done' issues must match merge of a Pull Request.",
+                "description": "When an issue is moved to Done, the Pull Request associated to the issue must be merge.",
                 "scope": {
                     "project": {
                         "name": "Project",
@@ -1015,15 +1115,15 @@
                         "scope": {
                             "project": "1010101010"
                         },
-                        "objective": "(COUNT_DONEISSUES_MERGEDPR/NUMBER_GH_MERGEDPR*100) >= 75",
+                        "objective": "(COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR/COUNT_DONE_ISSUES*100) >= 75",
                         "with": {
-                            "COUNT_DONEISSUES_MERGEDPR": {},
-                            "NUMBER_GH_MERGEDPR": {}
+                            "COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR": {},
+                            "COUNT_DONE_ISSUES": {}
                         },
                         "window": {
                             "type": "static",
-                            "period": "weekly",
-                            "initial": "2023-01-01"
+                            "period": "hourly",
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
@@ -1060,7 +1160,7 @@
                         "window": {
                             "type": "static",
                             "period": "hourly",
-                            "initial": "2023-01-01"
+                            "initial": "2022-01-01"
                         }
                     }
                 ]
@@ -1097,7 +1197,7 @@
                         "window": {
                             "type": "static",
                             "period": "weekly",
-                            "initial": "2023-01-01"
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
@@ -1133,7 +1233,7 @@
                         "window": {
                             "type": "static",
                             "period": "weekly",
-                            "initial": "2023-01-01"
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
@@ -1171,7 +1271,7 @@
                         "window": {
                             "type": "static",
                             "period": "weekly",
-                            "initial": "2023-01-01"
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
@@ -1208,7 +1308,7 @@
                         "window": {
                             "type": "static",
                             "period": "weekly",
-                            "initial": "2023-01-01"
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
@@ -1246,7 +1346,7 @@
                         "window": {
                             "type": "static",
                             "period": "weekly",
-                            "initial": "2023-01-01"
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
@@ -1283,7 +1383,7 @@
                         "window": {
                             "type": "static",
                             "period": "weekly",
-                            "initial": "2023-01-01"
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
