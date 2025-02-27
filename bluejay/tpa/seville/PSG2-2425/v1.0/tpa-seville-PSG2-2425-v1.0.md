@@ -343,7 +343,7 @@ This TP provides information about the team in relation to the reviews on each m
 
 ---
 
-# **TP8: Percentage of approved mergedPR (By Member, Hourly)**
+# **TP8: Percentage of approved mergedPR (By Member, Weekly)**
 
 **Most of your merged PRs should be approved by your teammates**
 
