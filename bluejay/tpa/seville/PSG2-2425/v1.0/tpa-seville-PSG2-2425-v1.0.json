@@ -256,7 +256,7 @@
                                     "2": {
                                         "type": "runScript",
                                         "variables": {},
-                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            if (projectItem.content.linkedBranches.totalCount > 0) {\r\n                result.push(projectItem);\r\n            }\r\n        }\r\n    }\r\n    return result\r\n}"
+                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            if (projectItem.content.linkedBranches?.totalCount > 0) {\r\n                result.push(projectItem);\r\n            }\r\n        }\r\n    }\r\n    return result\r\n}"
                                     }
                                 }
                             }
@@ -362,7 +362,7 @@
                                     "2": {
                                         "type": "runScript",
                                         "variables": {},
-                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            if (projectItem.content.closedByPullRequestsReferences.totalCount > 0) {\r\n                for(let pullRequest of projectItem.content.closedByPullRequestsReferences.nodes){\r\n                    if(pullRequest.state === \"OPEN\"){\r\n                        result.push(projectItem);\r\n                        break;\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n    return result\r\n}"
+                                        "script": "module.exports.generic = function func(inputData, variables) {\r\n    let result = [];\r\n    for(let project of inputData.data.repository.projectsV2.nodes){\r\n        for(let projectItem of project.items.nodes){\r\n            if (projectItem.content.closedByPullRequestsReferences?.totalCount > 0) {\r\n                for(let pullRequest of projectItem.content.closedByPullRequestsReferences.nodes){\r\n                    if(pullRequest.state === \"OPEN\"){\r\n                        result.push(projectItem);\r\n                        break;\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n    return result\r\n}"
                                     }
                                 }
                             }
