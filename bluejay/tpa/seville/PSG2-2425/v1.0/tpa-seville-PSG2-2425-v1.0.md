@@ -295,7 +295,7 @@ finish an issue before the weekends in order to comply with the established team
 
 ---
 
-# **TP7: Percentage of approved mergedPR (by Team, Hourly)**
+# **TP7: Percentage of approved mergedPR (by Team, Weekly)**
 
 **Most merged PRs should be approved**
 
