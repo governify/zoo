@@ -1282,7 +1282,7 @@
                         "window": {
                             "type": "static",
                             "period": "hourly",
-                            "initial": "2022-01-01"
+                            "initial": "2024-01-01"
                         }
                     }
                 ]
