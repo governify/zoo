@@ -1,0 +1,1308 @@
+{
+    "id": "tpa-1010101010",
+    "version": "1.0.0",
+    "type": "agreement",
+    "context": {
+        "validity": {
+            "initial": "2024-01-01",
+            "timeZone": "America/Los_Angeles"
+        },
+        "definitions": {
+            "schemas": {},
+            "scopes": {
+                "development": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": {
+                        "name": "Member",
+                        "description": "Member",
+                        "type": "string",
+                        "default": "*"
+                    }
+                }
+            },
+            "collectors": {
+                "eventcollector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                }
+            },
+            "dashboards": {
+                "main": {
+                    "base": "$_[infrastructure.internal.assets.default]/api/v1/public/grafana-dashboards/tpa/base.json",
+                    "modifier": "$_[infrastructure.internal.assets.default]/api/v1/public/grafana-dashboards/tpa/modifier.js",
+                    "overlay": "$_[infrastructure.internal.assets.default]/api/v1/public/grafana-dashboards/tpa/overlay.js",
+                    "config": {
+                        "configDashboard": true,
+                        "blocks": {
+                            "0": {
+                                "type": "divider-github-states",
+                                "config": {
+                                    "title": "Dashboard PSG2-2526"
+                                }
+                            },
+                            "1": {
+                                "type": "gauge-period-time-correlation-notZero",
+                                "guarantee": "CORRELATION_INPROGRESSISSUES_NEWBRANCH",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "x-axis-metric": "metric_COUNT_INPROGRESS_ISSUES",
+                                    "y-axis-metric": "metric_COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES",
+                                    "not-zero-metric": "metric_COUNT_INPROGRESS_ISSUES",
+                                    "time-graph-title": "TPa: At least 75% of 'In Progress' issues must match creation of a branch.(by Team, Hourly)"
+                                }
+                            },
+                            "2": {
+                                "type": "gauge-period-time-correlation-notZero",
+                                "guarantee": "CORRELATION_BRANCHESASSOCIATED_INPROGRESSISSUES",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "x-axis-metric": "metric_COUNT_INPROGRESS_ISSUES",
+                                    "y-axis-metric": "metric_COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES",
+                                    "not-zero-metric": "metric_COUNT_INPROGRESS_ISSUES",
+                                    "time-graph-title": "TPb: At least 75% of 'In Progress' issues must have different branches associated.(by Team, Hourly)"
+                                }
+                            },
+                            "3": {
+                                "type": "gauge-period-time-correlation-notZero",
+                                "guarantee": "CORRELATION_INREVIEWISSUES_OPENPR",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "x-axis-metric": "metric_COUNT_INREVIEW_ISSUES",
+                                    "y-axis-metric": "metric_COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR",
+                                    "not-zero-metric": "metric_COUNT_INREVIEW_ISSUES",
+                                    "time-graph-title": "TPc: At least 75% of 'In Review' issues must match creation of a Pull Request.(by Team, Hourly)"
+                                }
+                            },
+                            "4": {
+                                "type": "gauge-period-time-correlation-notZero",
+                                "guarantee": "CORRELATION_DONEISSUES_MERGEDPR",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "x-axis-metric": "metric_COUNT_DONE_ISSUES",
+                                    "y-axis-metric": "metric_COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR",
+                                    "not-zero-metric": "metric_COUNT_DONE_ISSUES",
+                                    "time-graph-title": "TPd: At least 75% of 'Done' issues must match merge of a Pull Request.(by Team, Hourly)"
+                                }
+                            },
+                            "5": {
+                                "type": "time-graph2-member",
+                                "guarantee": "NUMBER_INPROGRESSISSUES_HOURLY_UNDER_1",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "time-graph-title": "TPe: Number of “In Progress” issues is less than or equal to 1.(by Member, Hourly)"
+                                }
+                            },
+                            "6": {
+                                "type": "time-graph2-member-groupby",
+                                "guarantee": "NUMBER_DONEISSUES_WEEKLY_OVER_1",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "time-graph-title": "TPf: Number of “Done” issues is greater than or equal to 1.(by Member, Weekly)",
+                                    "time-interval": "1w",
+                                    "aggregation": "sum"
+                                }
+                            },
+                            "7": {
+                                "type": "gauge-period-time-correlation-notZero",
+                                "guarantee": "CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_TEAM",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "x-axis-metric": "metric_COUNT_PR_MERGED_TEAM",
+                                    "y-axis-metric": "metric_COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_TEAM",
+                                    "not-zero-metric": "metric_COUNT_PR_MERGED_TEAM",
+                                    "time-graph-title": "TPg: At least 75% of merged Pull Requests are approved.(by Team, Hourly)"
+                                }
+                            },
+                            "8": {
+                                "type": "time-graph2-member-notZero",
+                                "guarantee": "CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_MEMBER",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "not-zero-metric": "metric_COUNT_PR_MERGED_MEMBER",
+                                    "time-graph-title": "TPh.1: At least 75% of merged Pull Requests are approved.(by Member, Weekly)"
+                                }
+                            },
+                            "9": {
+                                "type": "time-graph2-member",
+                                "guarantee": "NUMBER_APPROVEDMERGEDPULLREQUEST_MEMBER",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "time-graph-title": "TPh.2: At least 1 of the merged Pull Requests is approved.(by Member, Weekly)"
+                                }
+                            },
+                            "10": {
+                                "type": "time-graph2-member-notZero",
+                                "guarantee": "CORRELATION_COUNTPRSWITHATLEASTONECOMMENTORONEREVIEWCOMMENTBYMEMBER_AND_COUNTPR",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "not-zero-metric": "metric_COUNT_PR",
+                                    "time-graph-title": "TPi.1: At least 20% of PRs opened by others are approved or commented on.(by Member, Weekly)"
+                                }
+                            },
+                            "11": {
+                                "type": "time-graph2-member",
+                                "guarantee": "NUMBER_COUNTPRSWITHATLEASTONECOMMENTORONEREVIEWCOMMENTBYMEMBER",
+                                "config": {
+                                    "scope-class": "2020202020",
+                                    "time-graph-title": "TPi.2: At least 1 of those open PRs is approved or commented on.(by Member, Weekly)"
+                                }
+                            }
+                        }
+                    },
+                    "notifications": {}
+                },
+                "infrastructure": {}
+            }
+        }
+    },
+    "terms": {
+        "metrics": {
+            "COUNT_INPROGRESS_ISSUES": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "zenhub": {
+                            "custom": {
+                                "type": "zenhub",
+                                "metric": "ISSUES_BY_COLUMN",
+                                "filters": {
+                                    "column": "In Progress"
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "zenhub": {
+                            "custom": {
+                                "type": "zenhub",
+                                "metric": "ISSUES_BY_COLUMN_WITH_ASSOCIATED_BRANCHES",
+                                "filters": {
+                                    "column": "In Progress"
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_INREVIEW_ISSUES": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "zenhub": {
+                            "custom": {
+                                "type": "zenhub",
+                                "metric": "ISSUES_BY_COLUMN",
+                                "filters": {
+                                    "column": "In Review"
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "zenhub": {
+                            "custom": {
+                                "type": "zenhub",
+                                "metric": "ISSUES_BY_COLUMN_WITH_ASSOCIATED_PULL_REQUESTS_BY_STATUS",
+                                "filters": {
+                                    "column": "In Review",
+                                    "status": "OPEN"
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_DONE_ISSUES": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "zenhub": {
+                            "custom": {
+                                "type": "zenhub",
+                                "metric": "ISSUES_BY_COLUMN",
+                                "filters": {
+                                    "columns": ["Closed", "Done"]
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "zenhub": {
+                            "custom": {
+                                "type": "zenhub",
+                                "metric": "ISSUES_BY_COLUMN_WITH_ASSOCIATED_PULL_REQUESTS_BY_STATUS",
+                                "filters": {
+                                    "columns": ["Closed", "Done"],
+                                    "status": "MERGED"
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "zenhub": {
+                            "custom": {
+                                "type": "zenhub",
+                                "metric": "ISSUES_WITH_DIFFERENT_BRANCHES_BY_COLUMN",
+                                "filters": {
+                                    "column": "In Progress"
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_INPROGRESSISSUES_MEMBER": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "zenhub": {
+                            "custom": {
+                                "type": "zenhub",
+                                "metric": "ISSUES_BY_COLUMN_ASSOCIATED_TO_MEMBER",
+                                "filters": {
+                                    "column": "In Progress"
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_DONEISSUES_MEMBER": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "zenhub": {
+                            "custom": {
+                                "type": "zenhub",
+                                "metric": "ISSUES_BY_COLUMN_FILTERED_BY_UPDATED_AT_DATE_ASSOCIATED_TO_MEMBER",
+                                "filters": {
+                                    "columns": ["Closed", "Done"]
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_TEAM": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get merged PRs with at least one positive review",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "paginatorCustomQueries": {
+                                            "initialQuery": "query mergedPRs{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    pullRequests(first: 100, states: MERGED) {\r\n      totalCount\r\n      pageInfo{\r\n        hasNextPage\r\n        endCursor\r\n      }\r\n      nodes {\r\n        id\r\n        state\r\n        title\r\n        body\r\n        baseRefName\r\n        headRefName\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        reviews(first: 10) {\r\n          totalCount\r\n          nodes {\r\n            createdAt\r\n            state\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                            "subqueries": [
+                                                {
+                                                    "query": "query mergedPRsPaginated{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    pullRequests(first: 100, after:\"%pageinfo.endcursor%\", states: MERGED) {\r\n      totalCount\r\n      pageInfo{\r\n        hasNextPage\r\n        endCursor\r\n      }\r\n      nodes {\r\n        id\r\n        state\r\n        title\r\n        body\r\n        baseRefName\r\n        headRefName\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        reviews(first: 10) {\r\n          totalCount\r\n          nodes {\r\n            createdAt\r\n            state\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                                    "insertResultAtPath": "repository.pullRequests.nodes"
+                                                }
+                                            ]
+                                        },
+                                        "cache": false
+                                    },
+                                    "1": {
+                                        "type": "objectGetSubObjects",
+                                        "location": "data.repository.pullRequests.nodes"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getReviews(inputData, variables) {\r\n    let res = [];\r\n    for (let pullRequest of inputData) {\r\n        if (new Date(pullRequest.mergedAt) > new Date(variables.from) && new Date(pullRequest.mergedAt) < new Date(variables.to) && pullRequest.reviews.nodes.some(review => review.state === 'APPROVED')) {\r\n            res.push(pullRequest);\r\n        }\r\n    }\r\n    return res;\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_PR_MERGED_TEAM": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get merged PRs",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "paginatorCustomQueries": {
+                                            "initialQuery": "query mergedPRs{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    pullRequests(first: 100, states: MERGED) {\r\n      totalCount\r\n      pageInfo{\r\n        hasNextPage\r\n        endCursor\r\n      }\r\n      nodes {\r\n        id\r\n        state\r\n        title\r\n        body\r\n        baseRefName\r\n        headRefName\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        reviews(first: 10) {\r\n          totalCount\r\n          nodes {\r\n            createdAt\r\n            state\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                            "subqueries": [
+                                                {
+                                                    "query": "query mergedPRsPaginated{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    pullRequests(first: 100, after:\"%pageinfo.endcursor%\", states: MERGED) {\r\n      totalCount\r\n      pageInfo{\r\n        hasNextPage\r\n        endCursor\r\n      }\r\n      nodes {\r\n        id\r\n        state\r\n        title\r\n        body\r\n        baseRefName\r\n        headRefName\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        reviews(first: 10) {\r\n          totalCount\r\n          nodes {\r\n            createdAt\r\n            state\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                                    "insertResultAtPath": "repository.pullRequests.nodes"
+                                                }
+                                            ]
+                                        },
+                                        "cache": false
+                                    },
+                                    "1": {
+                                        "type": "objectGetSubObjects",
+                                        "location": "data.repository.pullRequests.nodes"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getPullRequests(inputData, variables) {\r\n    let res = [];\r\n    for (let pullRequest of inputData) {\r\n        if (new Date(pullRequest.mergedAt) > new Date(variables.from) && new Date(pullRequest.mergedAt) < new Date(variables.to)) {\r\n            res.push(pullRequest);\r\n        }\r\n    }\r\n    return res;\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get merged PRs with at least one positive review",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "paginatorCustomQueries": {
+                                            "initialQuery": "query mergedPRs{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    pullRequests(first: 100, states: MERGED) {\r\n      totalCount\r\n      pageInfo{\r\n        hasNextPage\r\n        endCursor\r\n      }\r\n      nodes {\r\n        id\r\n        state\r\n        title\r\n        body\r\n        baseRefName\r\n        headRefName\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        reviews(first: 10) {\r\n          totalCount\r\n          nodes {\r\n            createdAt\r\n            state\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                            "subqueries": [
+                                                {
+                                                    "query": "query mergedPRsPaginated{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    pullRequests(first: 100, after:\"%pageinfo.endcursor%\", states: MERGED) {\r\n      totalCount\r\n      pageInfo{\r\n        hasNextPage\r\n        endCursor\r\n      }\r\n      nodes {\r\n        id\r\n        state\r\n        title\r\n        body\r\n        baseRefName\r\n        headRefName\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        reviews(first: 10) {\r\n          totalCount\r\n          nodes {\r\n            createdAt\r\n            state\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                                    "insertResultAtPath": "repository.pullRequests.nodes"
+                                                }
+                                            ]
+                                        },
+                                        "cache": false
+                                    },
+                                    "1": {
+                                        "type": "objectGetSubObjects",
+                                        "location": "data.repository.pullRequests.nodes"
+                                    },
+                                    "2": {
+                                        "type": "objectsFilterObjects",
+                                        "filters": [
+                                            "mergedBy.login == '%MEMBER.github.username%'"
+                                        ]
+                                    },
+                                    "3": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getReviews(inputData, variables) {\r\n    let res = [];\r\n    for (let pullRequest of inputData) {\r\n        if (new Date(pullRequest.mergedAt) > new Date(variables.from) && new Date(pullRequest.mergedAt) < new Date(variables.to) && pullRequest.reviews.nodes.some(review => review.state === 'APPROVED')) {\r\n            res.push(pullRequest);\r\n        }\r\n    }\r\n    return res;\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_PR_MERGED_MEMBER": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get merged PRs",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "paginatorCustomQueries": {
+                                            "initialQuery": "query mergedPRs{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    pullRequests(first: 100, states: MERGED) {\r\n      totalCount\r\n      pageInfo{\r\n        hasNextPage\r\n        endCursor\r\n      }\r\n      nodes {\r\n        id\r\n        state\r\n        title\r\n        body\r\n        baseRefName\r\n        headRefName\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        reviews(first: 10) {\r\n          totalCount\r\n          nodes {\r\n            createdAt\r\n            state\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                            "subqueries": [
+                                                {
+                                                    "query": "query mergedPRsPaginated{\r\n  repository(owner: \"%PROJECT.github.repoOwner%\", name: \"%PROJECT.github.repository%\") {\r\n    pullRequests(first: 100, after:\"%pageinfo.endcursor%\", states: MERGED) {\r\n      totalCount\r\n      pageInfo{\r\n        hasNextPage\r\n        endCursor\r\n      }\r\n      nodes {\r\n        id\r\n        state\r\n        title\r\n        body\r\n        baseRefName\r\n        headRefName\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        reviews(first: 10) {\r\n          totalCount\r\n          nodes {\r\n            createdAt\r\n            state\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                                    "insertResultAtPath": "repository.pullRequests.nodes"
+                                                }
+                                            ]
+                                        },
+                                        "cache": false
+                                    },
+                                    "1": {
+                                        "type": "objectGetSubObjects",
+                                        "location": "data.repository.pullRequests.nodes"
+                                    },
+                                    "2": {
+                                        "type": "objectsFilterObjects",
+                                        "filters": [
+                                            "mergedBy.login == '%MEMBER.github.username%'"
+                                        ]
+                                    },
+                                    "3": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getReviews(inputData, variables) {\r\n    let res = [];\r\n    for (let pullRequest of inputData) {\r\n        if (new Date(pullRequest.mergedAt) > new Date(variables.from) && new Date(pullRequest.mergedAt) < new Date(variables.to)) {\r\n            res.push(pullRequest);\r\n        }\r\n    }\r\n    return res;\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get pull requests with at least one comment by member",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "paginatorCustomQueries": {
+                                            "initialQuery": "{\r\n  repository(name: \"%PROJECT.github.repository%\", owner: \"%PROJECT.github.repoOwner%\") {\r\n    pullRequests(first: 100) {\r\n      pageInfo {\r\n        endCursor\r\n        hasNextPage\r\n      }\r\n      nodes {\r\n        bodyText\r\n        number\r\n        state\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        comments(first: 50) {\r\n          nodes {\r\n            author {\r\n              login\r\n            }\r\n            bodyText\r\n            createdAt\r\n          }\r\n        }\r\n        reviews(first: 30) {\r\n          nodes {\r\n            state\r\n            createdAt\r\n            bodyText\r\n            author {\r\n              login\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                            "subqueries": [
+                                                {
+                                                    "query": "{\r\n  repository(name: \"%PROJECT.github.repository%\", owner: \"%PROJECT.github.repoOwner%\") {\r\n    pullRequests(first: 100, after:\"%pageinfo.endcursor%\") {\r\n      pageInfo {\r\n        endCursor\r\n        hasNextPage\r\n      }\r\n      nodes {\r\n        bodyText\r\n        number\r\n        state\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n        comments(first: 50) {\r\n          nodes {\r\n            author {\r\n              login\r\n            }\r\n            bodyText\r\n            createdAt\r\n          }\r\n        }\r\n        reviews(first: 30) {\r\n          nodes {\r\n            state\r\n            createdAt\r\n            bodyText\r\n            author {\r\n              login\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                                    "insertResultAtPath": "repository.pullRequests.nodes"
+                                                }
+                                            ]
+                                        },
+                                        "cache": false
+                                    },
+                                    "1": {
+                                        "type": "objectGetSubObjects",
+                                        "location": "data.repository.pullRequests.nodes"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getPullRequestsWithAtLeastOneCommentByMember(inputData,variables)  {\r\n    let pullRequestsMergedAndOpenWithAtLeastOneComment = []\r\n    for (let pullRequest of inputData) {\r\n\r\n        if (pullRequest.author.login === '%MEMBER.github.username%') continue;\r\n\r\n        let isPullRequestAlreadyAdded = false;\r\n\r\n        if (pullRequest.state === 'OPEN' || pullRequest.state === 'MERGED' && Math.max(new Date(variables.from), new Date(pullRequest.createdAt)) <= Math.min(new Date(variables.to), new Date(pullRequest.mergedAt))) {\r\n            for (let comment of pullRequest.comments.nodes) {\r\n                if (comment.author.login === '%MEMBER.github.username%' && new Date(comment.createdAt) > new Date(variables.from) && new Date(comment.createdAt) < new Date(variables.to)) {\r\n                    pullRequestsMergedAndOpenWithAtLeastOneComment.push(pullRequest)\r\n                    isPullRequestAlreadyAdded = true;\r\n                    break;\r\n                }\r\n            }\r\n\r\n            if (isPullRequestAlreadyAdded) continue;\r\n\r\n            for (let review of pullRequest.reviews.nodes) {\r\n                if (review.bodyText.length > 0 && review.author.login === '%MEMBER.github.username%' && new Date(review.createdAt) > new Date(variables.from) && new Date(review.createdAt) < new Date(variables.to)) {\r\n                    pullRequestsMergedAndOpenWithAtLeastOneComment.push(pullRequest)\r\n                    break;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    return pullRequestsMergedAndOpenWithAtLeastOneComment;\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            },
+            "COUNT_PR": {
+                "collector": {
+                    "infrastructurePath": "internal.collector.events",
+                    "endpoint": "/api/v2/computations",
+                    "type": "POST-GET-V1",
+                    "config": {
+                        "scopeManager": "$_[infrastructure.internal.scopes.default]/api/v1/scopes/development"
+                    }
+                },
+                "measure": {
+                    "computing": "actual",
+                    "element": "number",
+                    "event": {
+                        "githubGQL": {
+                            "custom": {
+                                "type": "graphQL",
+                                "title": "Get pull request",
+                                "steps": {
+                                    "0": {
+                                        "type": "queryGetObject",
+                                        "paginatorCustomQueries": {
+                                            "initialQuery": "{\r\n  repository(name: \"%PROJECT.github.repository%\", owner: \"%PROJECT.github.repoOwner%\") {\r\n    pullRequests(first: 100) {\r\n      pageInfo{\r\n        endCursor\r\n        hasNextPage\r\n      }\r\n      nodes {\r\n        number\r\n        title\r\n        bodyText\r\n        state\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                            "subqueries": [
+                                                {
+                                                    "query": "{\r\n  repository(name: \"%PROJECT.github.repository%\", owner: \"%PROJECT.github.repoOwner%\") {\r\n    pullRequests(first: 100, after:\"%pageinfo.endcursor%\") {\r\n      pageInfo{\r\n        endCursor\r\n        hasNextPage\r\n      }\r\n      nodes {\r\n        number\r\n        title\r\n        bodyText\r\n        state\r\n        createdAt\r\n        author {\r\n          login\r\n        }\r\n        mergedAt\r\n        mergedBy {\r\n          login\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+                                                    "insertResultAtPath": "repository.pullRequests.nodes"
+                                                }
+                                            ]
+                                        },
+                                        "cache": false
+                                    },
+                                    "1": {
+                                        "type": "objectGetSubObjects",
+                                        "location": "data.repository.pullRequests.nodes"
+                                    },
+                                    "2": {
+                                        "type": "runScript",
+                                        "variables": {},
+                                        "script": "module.exports.generic = function getPullRequests(inputData,variables)  {\r\n    return inputData.filter(pullRequest => {\r\n        if (pullRequest.author.login !== '%MEMBER.github.username%' && (pullRequest.state === 'OPEN' || pullRequest.state === 'MERGED' && Math.max(new Date(variables.from), new Date(pullRequest.createdAt)) <= Math.min(new Date(variables.to), new Date(pullRequest.mergedAt)))) {\r\n            return pullRequest;\r\n        }\r\n    })\r\n}"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "scope": {
+                        "project": {
+                            "name": "Project",
+                            "description": "Project",
+                            "type": "string",
+                            "default": "1010101010"
+                        },
+                        "class": {
+                            "name": "Class",
+                            "description": "Group some Projects",
+                            "type": "string",
+                            "default": "2020202020"
+                        }
+                    }
+                }
+            }
+        },
+        "guarantees": [
+            {
+                "id": "CORRELATION_INPROGRESSISSUES_NEWBRANCH",
+                "notes": "#### Description\r\n```\r\nTPa: At least 75% of 'In Progress' issues must match creation of a branch.(by Team, Hourly)",
+                "description": "TPa - When an issue is moved to In Progress, a branch associated with this issue must be created.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    }
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010"
+                        },
+                        "objective": "(COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES/COUNT_INPROGRESS_ISSUES*100) >= 75",
+                        "with": {
+                            "COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES": {},
+                            "COUNT_INPROGRESS_ISSUES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "hourly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_BRANCHESASSOCIATED_INPROGRESSISSUES",
+                "notes": "#### Description\r\n```\r\nTPb: At least 75% of 'In Progress' issues must have different branches associated.(by Team, Hourly)",
+                "description": "TPb - Each issue In Progress must have a different branch associated with it.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    }
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010"
+                        },
+                        "objective": "(COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES/COUNT_INPROGRESS_ISSUES*100) >= 75",
+                        "with": {
+                            "COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES": {},
+                            "COUNT_INPROGRESS_ISSUES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "hourly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_INREVIEWISSUES_OPENPR",
+                "notes": "#### Description\r\n```\r\nTPc: At least 75% of 'In Review' issues must match creation of a Pull Request.(by Team, Hourly)",
+                "description": "TPc - When an issue is moved to In Review, a Pull Request associated with that issue must be created.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    }
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010"
+                        },
+                        "objective": "(COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR/COUNT_INREVIEW_ISSUES*100) >= 75",
+                        "with": {
+                            "COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR": {},
+                            "COUNT_INREVIEW_ISSUES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "hourly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_DONEISSUES_MERGEDPR",
+                "notes": "#### Description\r\n```\r\nTPd: At least 75% of 'Done' issues must match merge of a Pull Request.(by Team, Hourly)",
+                "description": "TPd - When an issue is moved to Done, the Pull Request associated to the issue must be merged.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    }
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010"
+                        },
+                        "objective": "(COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR/COUNT_DONE_ISSUES*100) >= 75",
+                        "with": {
+                            "COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR": {},
+                            "COUNT_DONE_ISSUES": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "hourly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "NUMBER_INPROGRESSISSUES_HOURLY_UNDER_1",
+                "notes": "#### Description\r\n```\r\nTPe: Number of “In Progress” issues is less than or equal to 1.(by Member, Hourly)",
+                "description": "TPe - Each developer should only be working on one issue at a time.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": "*"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010",
+                            "member": "*"
+                        },
+                        "objective": "COUNT_INPROGRESSISSUES_MEMBER <= 1",
+                        "with": {
+                            "COUNT_INPROGRESSISSUES_MEMBER": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "hourly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "NUMBER_DONEISSUES_WEEKLY_OVER_1",
+                "notes": "#### Description\r\n```\r\nTPf: Number of “Done” issues is greater than or equal to 1.(by Member, Weekly)",
+                "description": "TPf - Each developer should be finishing at least one issue per week.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": "*"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010",
+                            "member": "*"
+                        },
+                        "objective": "COUNT_DONEISSUES_MEMBER >= 1",
+                        "with": {
+                            "COUNT_DONEISSUES_MEMBER": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "weekly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_TEAM",
+                "notes": "#### Description\r\n```\r\nTPg: At least 75% of merged Pull Requests are approved.(by Team, Hourly)",
+                "description": "TPg - Each Pull Request should be approved before merging.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    }
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010"
+                        },
+                        "objective": "COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_TEAM/COUNT_PR_MERGED_TEAM * 100 >= 75",
+                        "with": {
+                            "COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_TEAM": {},
+                            "COUNT_PR_MERGED_TEAM": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "weekly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_APPROVEDMERGEDPULLREQUEST_TOTALMERGEDPULLREQUEST_MEMBER",
+                "notes": "#### Description\r\n```\r\nTPh.1: At least 75% of merged Pull Requests are approved.(by Member, Weekly)",
+                "description": "TPh.1 - Each developer should only merge a Pull Request if it is approved.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": "*"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010",
+                            "member": "*"
+                        },
+                        "objective": "COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER/COUNT_PR_MERGED_MEMBER * 100 >= 75",
+                        "with": {
+                            "COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER": {},
+                            "COUNT_PR_MERGED_MEMBER": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "weekly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "NUMBER_APPROVEDMERGEDPULLREQUEST_MEMBER",
+                "notes": "#### Description\r\n```\r\nTPh.2: At least 1 of the merged Pull Requests is approved.(by Member, Weekly)",
+                "description": "TPh.2 - Each developer should only merge a Pull Request if it is approved",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": "*"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010",
+                            "member": "*"
+                        },
+                        "objective": "COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER >= 1",
+                        "with": {
+                            "COUNT_MERGED_PR_WITH_POSITIVE_REVIEWS_MEMBER": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "weekly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CORRELATION_COUNTPRSWITHATLEASTONECOMMENTORONEREVIEWCOMMENTBYMEMBER_AND_COUNTPR",
+                "notes": "#### Description\r\n```\r\nTPi.1: At least 20% of PRs opened by others are approved or commented on.(by Member, Weekly)",
+                "description": "TPi.1 - Each developer should add comments or approve several other teammates' open Pull Requests each week.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": "*"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010",
+                            "member": "*"
+                        },
+                        "objective": "COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER/COUNT_PR*100 >= 20",
+                        "with": {
+                            "COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER": {},
+                            "COUNT_PR": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "weekly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "NUMBER_COUNTPRSWITHATLEASTONECOMMENTORONEREVIEWCOMMENTBYMEMBER",
+                "notes": "#### Description\r\n```\r\nTPi.2: At least 1 of those open PRs is approved or commented on.(by Member, Weekly)",
+                "description": "TPi.2 - Each developer should add comments or approve several other teammates' open Pull Requests each week.",
+                "scope": {
+                    "project": {
+                        "name": "Project",
+                        "description": "Project",
+                        "type": "string",
+                        "default": "1010101010"
+                    },
+                    "class": {
+                        "name": "Class",
+                        "description": "Group some Projects",
+                        "type": "string",
+                        "default": "2020202020"
+                    },
+                    "member": "*"
+                },
+                "of": [
+                    {
+                        "scope": {
+                            "project": "1010101010",
+                            "member": "*"
+                        },
+                        "objective": "COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER >= 1",
+                        "with": {
+                            "COUNT_PRS_WITH_AT_LEAST_ONE_COMMENT_OR_ONE_REVIEW_COMMENT_BY_MEMBER": {}
+                        },
+                        "window": {
+                            "type": "static",
+                            "period": "weekly",
+                            "initial": "2024-01-01"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
