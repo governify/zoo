@@ -1,4 +1,4 @@
-**https://github.com/governify/zoo/tree/main/bluejay/tpa/seville/ISPP-2425/v1.0**
+**https://github.com/governify/zoo/tree/main/bluejay/tpa/US/ISPP-2425/v1.0**
 
 **Support:** <https://app.gitter.im/#/room/#governify_community:gitter.im>
 

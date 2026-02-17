@@ -1,4 +1,4 @@
-**https://github.com/governify/zoo/tree/main/bluejay/tpa/seville/PSG2-2425/v1.0**
+**https://github.com/governify/zoo/tree/main/bluejay/tpa/US/PSG2-2425/v1.0**
 
 **Support:** <https://app.gitter.im/#/room/#governify_community:gitter.im>
 

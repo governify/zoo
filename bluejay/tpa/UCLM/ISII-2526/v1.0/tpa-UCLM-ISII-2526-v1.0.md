@@ -1,4 +1,4 @@
-**https://github.com/governify/zoo/tree/main/bluejay/tpa/castillalamancha/ISII-2526/v1.0**
+**https://github.com/governify/zoo/tree/main/bluejay/tpa/UCLM/ISII-2526/v1.0**
 
 **Support:** <https://app.gitter.im/#/room/#governify_community:gitter.im>
 
