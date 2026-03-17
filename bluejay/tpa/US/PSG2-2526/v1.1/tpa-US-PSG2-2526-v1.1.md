@@ -1,4 +1,4 @@
-**https://github.com/governify/zoo/tree/main/bluejay/tpa/US/PSG2-2526/v1.0**
+**https://github.com/governify/zoo/tree/main/bluejay/tpa/US/PSG2-2526/v1.1**
 
 **Support:** <https://app.gitter.im/#/room/#governify_community:gitter.im>
 
@@ -6,7 +6,7 @@
 
 |**Version**|**Date**|**Description**|**Authors**|
 | - | - | - | - |
-|**v1.1**|**2026-01-31**|**Complete description**|**Javier Fernández**|
+|**v1.1**|**2026-03-18**|**Complete description**|**Javier Fernández**|
 
 ## <a name="_page3_x72.00_y72.00"></a>**Introduction and context**
 
