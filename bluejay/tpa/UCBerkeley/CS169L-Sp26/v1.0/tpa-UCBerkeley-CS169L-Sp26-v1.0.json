@@ -63,7 +63,7 @@
                                     "x-axis-metric": "metric_COUNT_INPROGRESS_ISSUES",
                                     "y-axis-metric": "metric_COUNT_INPROGRESS_ISSUES_WITH_ASSOCIATED_BRANCHES",
                                     "not-zero-metric": "metric_COUNT_INPROGRESS_ISSUES",
-                                    "time-graph-title": "TPa: At least 75% of 'In Progress' issues must match creation of a branch.(by Team, Hourly)"
+                                    "time-graph-title": "TPa: At least 75% of 'In progress' issues must match creation of a branch.(by Team, Hourly)"
                                 }
                             },
                             "2": {
@@ -74,7 +74,7 @@
                                     "x-axis-metric": "metric_COUNT_INPROGRESS_ISSUES",
                                     "y-axis-metric": "metric_COUNT_BRANCHES_ASSOCIATED_TO_INPROGRESS_ISSUES",
                                     "not-zero-metric": "metric_COUNT_INPROGRESS_ISSUES",
-                                    "time-graph-title": "TPb: At least 75% of 'In Progress' issues must have different branches associated.(by Team, Hourly)"
+                                    "time-graph-title": "TPb: At least 75% of 'In progress' issues must have different branches associated.(by Team, Hourly)"
                                 }
                             },
                             "3": {
@@ -85,7 +85,7 @@
                                     "x-axis-metric": "metric_COUNT_INREVIEW_ISSUES",
                                     "y-axis-metric": "metric_COUNT_INREVIEW_ISSUES_WITH_ASSOCIATED_OPEN_PR",
                                     "not-zero-metric": "metric_COUNT_INREVIEW_ISSUES",
-                                    "time-graph-title": "TPc: At least 75% of 'In Review' issues must match creation of a Pull Request.(by Team, Hourly)"
+                                    "time-graph-title": "TPc: At least 75% of 'In review' issues must match creation of a Pull Request.(by Team, Hourly)"
                                 }
                             },
                             "4": {
@@ -104,7 +104,7 @@
                                 "guarantee": "NUMBER_INPROGRESSISSUES_HOURLY_UNDER_1",
                                 "config": {
                                     "scope-class": "2020202020",
-                                    "time-graph-title": "TPe: Number of “In Progress” issues is less than or equal to 1.(by Member, Hourly)"
+                                    "time-graph-title": "TPe: Number of “In progress” issues is less than or equal to 1.(by Member, Hourly)"
                                 }
                             },
                             "6": {
@@ -190,7 +190,7 @@
                                 "type": "githubGQLV2",
                                 "metric": "ISSUES_BY_COLUMN",
                                 "filters": {
-                                    "column": "In Progress"
+                                    "column": "In progress"
                                 }
                             }
                         }
@@ -229,7 +229,7 @@
                                 "type": "githubGQLV2",
                                 "metric": "ISSUES_BY_COLUMN_WITH_ASSOCIATED_BRANCHES",
                                 "filters": {
-                                    "column": "In Progress"
+                                    "column": "In progress"
                                 }
                             }
                         }
@@ -268,7 +268,7 @@
                                 "type": "githubGQLV2",
                                 "metric": "ISSUES_BY_COLUMN",
                                 "filters": {
-                                    "column": "In Review"
+                                    "column": "In review"
                                 }
                             }
                         }
@@ -307,7 +307,7 @@
                                 "type": "githubGQLV2",
                                 "metric": "ISSUES_BY_COLUMN_WITH_ASSOCIATED_PULL_REQUESTS_BY_STATUS",
                                 "filters": {
-                                    "column": "In Review",
+                                    "column": "In review",
                                     "status": "OPEN"
                                 }
                             }
@@ -426,7 +426,7 @@
                                 "type": "githubGQLV2",
                                 "metric": "ISSUES_WITH_DIFFERENT_BRANCHES_BY_COLUMN",
                                 "filters": {
-                                    "column": "In Progress"
+                                    "column": "In progress"
                                 }
                             }
                         }
@@ -465,7 +465,7 @@
                                 "type": "githubGQLV2",
                                 "metric": "ISSUES_BY_COLUMN_ASSOCIATED_TO_MEMBER",
                                 "filters": {
-                                    "column": "In Progress"
+                                    "column": "In progress"
                                 }
                             }
                         }
@@ -901,8 +901,8 @@
         "guarantees": [
             {
                 "id": "CORRELATION_INPROGRESSISSUES_NEWBRANCH",
-                "notes": "#### Description\r\n```\r\nTPa: At least 75% of 'In Progress' issues must match creation of a branch.(by Team, Hourly)",
-                "description": "TPa - When an issue is moved to In Progress, a branch associated with this issue must be created.",
+                "notes": "#### Description\r\n```\r\nTPa: At least 75% of 'In progress' issues must match creation of a branch.(by Team, Hourly)",
+                "description": "TPa - When an issue is moved to In progress, a branch associated with this issue must be created.",
                 "scope": {
                     "project": {
                         "name": "Project",
@@ -937,8 +937,8 @@
             },
             {
                 "id": "CORRELATION_BRANCHESASSOCIATED_INPROGRESSISSUES",
-                "notes": "#### Description\r\n```\r\nTPb: At least 75% of 'In Progress' issues must have different branches associated.(by Team, Hourly)",
-                "description": "TPb - Each issue In Progress must have a different branch associated with it.",
+                "notes": "#### Description\r\n```\r\nTPb: At least 75% of 'In progress' issues must have different branches associated.(by Team, Hourly)",
+                "description": "TPb - Each issue In progress must have a different branch associated with it.",
                 "scope": {
                     "project": {
                         "name": "Project",
@@ -973,8 +973,8 @@
             },
             {
                 "id": "CORRELATION_INREVIEWISSUES_OPENPR",
-                "notes": "#### Description\r\n```\r\nTPc: At least 75% of 'In Review' issues must match creation of a Pull Request.(by Team, Hourly)",
-                "description": "TPc - When an issue is moved to In Review, a Pull Request associated with that issue must be created.",
+                "notes": "#### Description\r\n```\r\nTPc: At least 75% of 'In review' issues must match creation of a Pull Request.(by Team, Hourly)",
+                "description": "TPc - When an issue is moved to In review, a Pull Request associated with that issue must be created.",
                 "scope": {
                     "project": {
                         "name": "Project",
@@ -1045,7 +1045,7 @@
             },
             {
                 "id": "NUMBER_INPROGRESSISSUES_HOURLY_UNDER_1",
-                "notes": "#### Description\r\n```\r\nTPe: Number of “In Progress” issues is less than or equal to 1.(by Member, Hourly)",
+                "notes": "#### Description\r\n```\r\nTPe: Number of “In progress” issues is less than or equal to 1.(by Member, Hourly)",
                 "description": "TPe - Each developer should only be working on one issue at a time.",
                 "scope": {
                     "project": {
