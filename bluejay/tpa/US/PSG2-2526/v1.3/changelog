@@ -1,0 +1,1 @@
+- Now COUNT_DONE_ISSUES and COUNT_DONE_ISSUES_WITH_ASSOCIATED_CLOSED_PR are filtered by AfterCreatedAt
